@@ -1,0 +1,11 @@
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\bin\Debug\VA_GUI.exe.config
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\bin\Debug\VA_GUI.exe
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\bin\Debug\VA_GUI.pdb
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\obj\Debug\VA_GUI.Form1.resources
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\obj\Debug\VA_GUI.Node_Form.resources
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\obj\Debug\VA_GUI.Properties.Resources.resources
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\obj\Debug\VA_GUI.csproj.GenerateResource.Cache
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\obj\Debug\VA_GUI.exe
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\obj\Debug\VA_GUI.pdb
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\obj\Debug\VA_GUI.Output_Previewer.resources
+C:\Users\Sergio\Documents\ProjectDormitory\VA_GUI\VA_GUI\obj\Debug\VA_GUI.Credits.resources
