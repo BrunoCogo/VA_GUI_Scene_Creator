@@ -350,8 +350,8 @@ Disallow: /login
 Disallow: /images/modules/explore/spotlight/*.mp4$
 
 User-agent: Googlebot
-Allow: /*/*/tree/master
-Allow: /*/*/blob/master
+Disallow: /*/*/tree/master
+Disallow: /*/*/blob/master
 Disallow: /ekansa/Open-Context-Data
 Disallow: /ekansa/opencontext-*
 Disallow: /*/*/pulse
