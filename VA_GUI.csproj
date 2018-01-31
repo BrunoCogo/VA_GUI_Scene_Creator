@@ -40,6 +40,9 @@
     <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -72,12 +75,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Node Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Node Form.Designer.cs">
-      <DependentUpon>Node Form.cs</DependentUpon>
-    </Compile>
     <Compile Include="Node.cs" />
     <Compile Include="Output Previewer.cs">
       <SubType>Form</SubType>
@@ -94,9 +91,6 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Node Form.resx">
-      <DependentUpon>Node Form.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Output Previewer.resx">
       <DependentUpon>Output Previewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +103,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
