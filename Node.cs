@@ -11,6 +11,9 @@ namespace VA_GUI
 {
     public class Node
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
         public enum NodeType { nothing, noncombat, combat }
 
         public string ID;
@@ -123,10 +126,12 @@ namespace VA_GUI
 
         public void RelateOptions(List<Node> workList)
         {
+            log.Debug("Linking Options of nodes for " + Name);
             for (int i = 0; i < OptionIDLink.Count; i++)
             {
                 OptionLinking.Add(OptionIDLink[i], GetFromList(workList, OptionIDLink[i]));
             }
+            log.Debug("Finish Linking Options for" + Name);
 
         }
 
@@ -136,71 +141,79 @@ namespace VA_GUI
         /// <param name="fileSection">Extrap of text separaded node</param>
         public void InterpretNode(List<string> fileSection)
         {
-            for (int li = 0; li < fileSection.Count; li++)
+            try
             {
-                if (!fileSection[li].StartsWith("#") || fileSection[li].Length != 0)
+                for (int li = 0; li < fileSection.Count; li++)
                 {
-                    string data;
-                    NodeType Typedata;
-                    switch (GetLineType(fileSection[li]))
+                    if (!fileSection[li].StartsWith("#") || fileSection[li].Length != 0)
                     {
-                        case LineType.ID:
-                            data = fileSection[li].Replace("[", "").Replace(" ", "");
-                            ID = data;
-                            break;
-                        case LineType.Name:
-                            data = fileSection[li].Replace("name:", "").Replace(";", "").Replace(" ", "");
-                            Name = data;
-                            break;
-                        case LineType.Title:
-                            data = fileSection[li].Replace("title:", "").Replace(";", "");
-                            Title = data;
-                            break;
-                        case LineType.Type:
-                            data = fileSection[li].Replace("type:", "").Replace(";", "").Replace(" ", "");
-                            if (data == "noncombat") Typedata = NodeType.noncombat;
-                            else if (data == "combat") Typedata = NodeType.combat;
-                            else Typedata = NodeType.nothing;
-                            Type = Typedata;
-                            break;
+                        string data;
+                        NodeType Typedata;
+                        switch (GetLineType(fileSection[li]))
+                        {
+                            case LineType.ID:
+                                data = fileSection[li].Replace("[", "").Replace(" ", "");
+                                ID = data;
+                                break;
+                            case LineType.Name:
+                                data = fileSection[li].Replace("name:", "").Replace(";", "").Replace(" ", "");
+                                Name = data;
+                                break;
+                            case LineType.Title:
+                                data = fileSection[li].Replace("title:", "").Replace(";", "");
+                                Title = data;
+                                break;
+                            case LineType.Type:
+                                data = fileSection[li].Replace("type:", "").Replace(";", "").Replace(" ", "");
+                                if (data == "noncombat") Typedata = NodeType.noncombat;
+                                else if (data == "combat") Typedata = NodeType.combat;
+                                else Typedata = NodeType.nothing;
+                                Type = Typedata;
+                                break;
 
-                        case LineType.OptionCount:
-                            data = fileSection[li].Replace("optioncount:", "").Replace(";", "").Replace(" ", "");
-                            OptionCount = Convert.ToInt16(data);
-                            break;
+                            case LineType.OptionCount:
+                                data = fileSection[li].Replace("optioncount:", "").Replace(";", "").Replace(" ", "");
+                                OptionCount = Convert.ToInt16(data);
+                                break;
 
-                        case LineType.Description:
-                            data = fileSection[li].Replace("description:", "").Replace(";", "");
-                            Description = data;
-                            break;
+                            case LineType.Description:
+                                data = fileSection[li].Replace("description:", "").Replace(";", "");
+                                Description = data;
+                                break;
 
-                        case LineType.Option:
-                            data = fileSection[li].Replace("option:", "").Replace(";", "").Replace(" ", "");
-                            OptionIDLink.Add(data);
-                            break;
+                            case LineType.Option:
+                                data = fileSection[li].Replace("option:", "").Replace(";", "").Replace(" ", "");
+                                OptionIDLink.Add(data);
+                                break;
 
-                        case LineType.Chance:
-                            data = fileSection[li].Replace("chance:", "").Replace(";", "").Replace(" ", "");
-                            chance = Convert.ToDouble(data);
-                            ProticeStart = true;
-                            break;
+                            case LineType.Chance:
+                                data = fileSection[li].Replace("chance:", "").Replace(";", "").Replace(" ", "");
+                                chance = Convert.ToDouble(data);
+                                ProticeStart = true;
+                                break;
 
-                        case LineType.DescribeCombat:
-                            data = fileSection[li].Replace("describe:", "").Replace(";", "").Replace(" ", "");
-                            BattleDescr = bool.Parse(data);
+                            case LineType.DescribeCombat:
+                                data = fileSection[li].Replace("describe:", "").Replace(";", "").Replace(" ", "");
+                                BattleDescr = bool.Parse(data);
 
-                            break;
-                        case LineType.Enemy:
-                            data = fileSection[li].Replace("enemy:", "").Replace(";", "").Replace(" ", "");
-                            EnemyToFight = data;
-                            break;
-                        case LineType.Comment:
-                            break;
-                        default:
-                            break;
+                                break;
+                            case LineType.Enemy:
+                                data = fileSection[li].Replace("enemy:", "").Replace(";", "").Replace(" ", "");
+                                EnemyToFight = data;
+                                break;
+                            case LineType.Comment:
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                log.Error("THERE WAS AN ERROR TRYING TO READ A NODE", ex);
+            }
+            
         }
 
         LineType GetLineType(string line)

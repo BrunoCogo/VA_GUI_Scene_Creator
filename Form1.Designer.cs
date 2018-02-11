@@ -70,7 +70,6 @@
             this.bt_AddPlace = new System.Windows.Forms.Button();
             this.bt_delPlace = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.bt_cretits = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Chance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb_chance)).BeginInit();
@@ -102,7 +101,7 @@
             this.bt_ExportCustom.Name = "bt_ExportCustom";
             this.bt_ExportCustom.Size = new System.Drawing.Size(148, 27);
             this.bt_ExportCustom.TabIndex = 1;
-            this.bt_ExportCustom.Text = "Export Custom Folder";
+            this.bt_ExportCustom.Text = "Save Current Place";
             this.bt_ExportCustom.UseVisualStyleBackColor = true;
             this.bt_ExportCustom.Click += new System.EventHandler(this.Bt_ExportCustom_Click);
             // 
@@ -623,22 +622,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // bt_cretits
-            // 
-            this.bt_cretits.Location = new System.Drawing.Point(706, 40);
-            this.bt_cretits.Name = "bt_cretits";
-            this.bt_cretits.Size = new System.Drawing.Size(119, 23);
-            this.bt_cretits.TabIndex = 29;
-            this.bt_cretits.Text = "Add credits";
-            this.bt_cretits.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.ClientSize = new System.Drawing.Size(855, 623);
-            this.Controls.Add(this.bt_cretits);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_delPlace);
             this.Controls.Add(this.bt_AddPlace);
@@ -701,7 +690,6 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn cl_OptionLink;
         private System.Windows.Forms.DataGridViewButtonColumn cl_del;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button bt_cretits;
     }
 }
 

@@ -13,6 +13,8 @@ namespace VA_GUI
 {
     public partial class Output_Previewer : Form
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         string myName = "";
 
         List<Node> NodeCollection;
@@ -29,6 +31,11 @@ namespace VA_GUI
 
         public Output_Previewer(List<Node> placeNodes, string PlaceName)
         {
+            log.Debug("Initiating Output Preview");
+            if (placeNodes.Count == 0)
+            {
+                log.Warn("WARNING - There is no nodes on the previewr to preview");
+            }
             InitializeComponent();
             NodeCollection = placeNodes;
             myName = PlaceName;
@@ -41,6 +48,7 @@ namespace VA_GUI
 
         private void Output_Previewer_Load(object sender, EventArgs e)
         {
+            log.Debug("");
             GenerateFile();
         }
 
@@ -89,7 +97,7 @@ namespace VA_GUI
         void GenerateFile()
         {
             Textbox_PREVIEW.Text += "2.0.0\r\n";
-            Textbox_PREVIEW.Text += "#File Created by VA_GUI by Cogo";
+            Textbox_PREVIEW.Text += "#File Created in VA_GUI by Cogo";
             Textbox_PREVIEW.Text += L;
 
             //Credits Go here//
@@ -123,6 +131,8 @@ namespace VA_GUI
             {
                 TranslateNode(node);
             }
+
+            log.Info("This place \""+ myName +"\" has finish being interpreted as a vgp file, Output on textbox");
 
             UpdateSideAssistaint();
         }
@@ -193,6 +203,7 @@ namespace VA_GUI
                
                 default:
                     MessageBox.Show("No type Node detected. Error imminent");
+                    log.Error("No Type Node Detected");
                     break;
             }
             Textbox_PREVIEW.Text += "];" + L + L;
@@ -202,9 +213,11 @@ namespace VA_GUI
 
         public void UpdateSideAssistaint()
         {
+            log.Debug("Updating Node");
             UpdateNodeRef();
             UpdateInvalid();
             UpdateUsedEnemies();
+            log.Debug("Finish Updating Node");
         }
 
         public void UpdateNodeRef()
@@ -213,16 +226,19 @@ namespace VA_GUI
 
             foreach (string node in WasNotReferencedList)
             {
+                log.Warn(node + " not used by another node");
                 tb_Nodes.Text += node + L;
             }
         }
 
         public void UpdateInvalid()
         {
+
             tb_Invalid.Text = "";
 
             foreach (string inv in InvalidReferencedList)
             {
+                log.Warn(inv + " not in list");
                 tb_Invalid.Text += inv + L;
             }
         }
@@ -239,20 +255,24 @@ namespace VA_GUI
 
         private void bt_Cancel_Click(object sender, EventArgs e)
         {
+            log.Debug("Previewer was closed by User");
             this.Close();
         }
 
         private void bt_saveFile_Click(object sender, EventArgs e)
         {
+            log.Debug("Saving: " + myName);
             string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\voreadventure\\custom\\places\\" + myName + ".vgp";
             MessageBox.Show(path);
             StreamWriter NewFile = new StreamWriter(path);
             NewFile.Write(Textbox_PREVIEW.Text);
             NewFile.Close();
+            log.Info("Save Complete");
         }
 
         private void bt_Credits_Click(object sender, EventArgs e)
         {
+            log.Debug("Iniciating Credit Form");
             Credits cs = new Credits();
             if (cs.ShowDialog() == DialogResult.OK)
             {
@@ -263,6 +283,7 @@ namespace VA_GUI
 
                 Textbox_PREVIEW.Text = "";
                 cs.Close();
+                log.Info("Credits Finish Succesfully");
                 GenerateFile();
             }
         }
