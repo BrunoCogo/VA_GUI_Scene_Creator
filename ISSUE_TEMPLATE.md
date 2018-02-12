@@ -1,6 +1,6 @@
 <!--- Provide a general summary of the issue or idea in the Title above and fill in the corresponding area -->
 
-###Bug Reporting
+### Bug Reporting
 ## Expected Behavior
 <!--- Tell us what should happen -->
 
