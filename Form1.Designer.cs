@@ -70,6 +70,7 @@
             this.bt_AddPlace = new System.Windows.Forms.Button();
             this.bt_delPlace = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Chance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb_chance)).BeginInit();
@@ -447,7 +448,7 @@
             this.cl_OptName.HeaderText = "Option";
             this.cl_OptName.Name = "cl_OptName";
             this.cl_OptName.ReadOnly = true;
-            this.cl_OptName.Width = 61;
+            this.cl_OptName.Width = 63;
             // 
             // cl_OptionLink
             // 
@@ -457,7 +458,7 @@
             this.cl_OptionLink.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             this.cl_OptionLink.HeaderText = "Linked Node";
             this.cl_OptionLink.Name = "cl_OptionLink";
-            this.cl_OptionLink.Width = 72;
+            this.cl_OptionLink.Width = 74;
             // 
             // cl_del
             // 
@@ -622,12 +623,27 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button2.Location = new System.Drawing.Point(320, 9);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(148, 27);
+            this.button2.TabIndex = 29;
+            this.button2.Text = "Export ZIP Pack";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.ClientSize = new System.Drawing.Size(855, 623);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_delPlace);
             this.Controls.Add(this.bt_AddPlace);
@@ -639,6 +655,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Vore Adventure Scene Editor By Cogo";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Chance)).EndInit();
@@ -690,6 +707,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn cl_OptionLink;
         private System.Windows.Forms.DataGridViewButtonColumn cl_del;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

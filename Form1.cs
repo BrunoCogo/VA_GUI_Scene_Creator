@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Controls;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -349,7 +350,22 @@ namespace VA_GUI
 
             const string EnemyPathAddon = @"\custom\monsters";
 
-            PlacesName = Directory.EnumerateFiles(path + PlacesPathAddon).ToList<string>();
+            try
+            {
+                PlacesName = Directory.EnumerateFiles(path + PlacesPathAddon).ToList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is DirectoryNotFoundException)
+                {
+                    log.Error("Error while trying to read a non-existent path.",ex);
+                    MessageBox.Show("No Vore Adventure data has been detected.\nCreating the vore adventure path on " + path);
+                    //implement path creaion
+
+                    Directory.CreateDirectory(path + PlacesPathAddon);
+                    Directory.CreateDirectory(path + EnemyPathAddon);
+                }
+            }
 
             EnemyLibrary.Clear();
             EnemyLibrary = GetEnemies(path + EnemyPathAddon);
@@ -689,6 +705,7 @@ namespace VA_GUI
             }
             catch (Exception)
             {
+                log.Warn("Opening Place Previewer with no place attached. Canceling preview");
                 MessageBox.Show("Do you have a place selected on the Working Place menu?\nif not, It would be advisable to created... just sain... that's how I know what to process... \n. 3 .");
                
             }
@@ -910,6 +927,23 @@ namespace VA_GUI
                 log.Debug("Place added to directory");
                 PlaceDir.Add(cb_place.Text, NodeLibraryList);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            log.Info("Launching Exporter");
+            ZipperForm z = new ZipperForm(PlaceDir,EnemyLibrary);
+
+            if (z.ShowDialog() == DialogResult.OK)
+            {
+                log.Info("Zipper Closeing, Export Assumed to succeed");
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
