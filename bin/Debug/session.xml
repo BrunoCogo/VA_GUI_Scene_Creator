@@ -5,7 +5,6 @@
     <string>BattleTest</string>
     <string>Hotel</string>
     <string>Pool</string>
-    <string>My Place</string>
   </keys>
   <NSerias>
     <ArrayOfNodeSeria>
@@ -391,20 +390,6 @@
         <OptionCount>0</OptionCount>
         <OptionIDLink />
         <Description> .You looked on the side and there was a sign... "Because of outside causes of this wolrd, it is not recommendable for you to interact with stuff that is just not there yet. We advice you to wait". Teased, you puted a note on the ground advising the author of this mod to stop trying to break the four wall, you also added the request to update soon</Description>
-        <ProticeStart>false</ProticeStart>
-        <BattleDescr>false</BattleDescr>
-        <chance>0</chance>
-      </NodeSeria>
-    </ArrayOfNodeSeria>
-    <ArrayOfNodeSeria>
-      <NodeSeria>
-        <ID>placey</ID>
-        <Name>Man</Name>
-        <Title>Drop my hole!</Title>
-        <Type>nothing</Type>
-        <OptionCount>0</OptionCount>
-        <OptionIDLink />
-        <Description>NOW DO IT!</Description>
         <ProticeStart>false</ProticeStart>
         <BattleDescr>false</BattleDescr>
         <chance>0</chance>

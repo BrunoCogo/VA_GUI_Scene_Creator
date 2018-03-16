@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VA_GUI
 {
-    static class Program
+    public static class Program
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         

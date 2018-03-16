@@ -129,7 +129,15 @@ namespace VA_GUI
             log.Debug("Linking Options of nodes for " + Name);
             for (int i = 0; i < OptionIDLink.Count; i++)
             {
-                OptionLinking.Add(OptionIDLink[i], GetFromList(workList, OptionIDLink[i]));
+                try
+                {
+
+                    OptionLinking.Add(OptionIDLink[i], GetFromList(workList, OptionIDLink[i]));
+                }
+                catch (Exception ex)
+                {
+                    log.Error("trying to add option", ex);
+                }
             }
             log.Debug("Finish Linking Options for" + Name);
 
