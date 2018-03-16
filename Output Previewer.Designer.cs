@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Output_Previewer));
             this.Textbox_PREVIEW = new System.Windows.Forms.TextBox();
             this.bt_saveFile = new System.Windows.Forms.Button();
             this.bt_Cancel = new System.Windows.Forms.Button();
@@ -40,6 +41,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tb_Invalid = new System.Windows.Forms.TextBox();
             this.bt_Credits = new System.Windows.Forms.Button();
+            this.lb_charcount = new System.Windows.Forms.Label();
+            this.HasStarter = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // Textbox_PREVIEW
@@ -47,7 +50,7 @@
             this.Textbox_PREVIEW.AcceptsReturn = true;
             this.Textbox_PREVIEW.AcceptsTab = true;
             this.Textbox_PREVIEW.BackColor = System.Drawing.SystemColors.Menu;
-            this.Textbox_PREVIEW.Location = new System.Drawing.Point(12, 42);
+            this.Textbox_PREVIEW.Location = new System.Drawing.Point(16, 42);
             this.Textbox_PREVIEW.Multiline = true;
             this.Textbox_PREVIEW.Name = "Textbox_PREVIEW";
             this.Textbox_PREVIEW.ReadOnly = true;
@@ -57,7 +60,7 @@
             // 
             // bt_saveFile
             // 
-            this.bt_saveFile.Location = new System.Drawing.Point(12, 741);
+            this.bt_saveFile.Location = new System.Drawing.Point(338, 8);
             this.bt_saveFile.Name = "bt_saveFile";
             this.bt_saveFile.Size = new System.Drawing.Size(165, 23);
             this.bt_saveFile.TabIndex = 3;
@@ -78,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(13, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 5;
@@ -87,7 +90,7 @@
             // lb_nodeCount
             // 
             this.lb_nodeCount.AutoSize = true;
-            this.lb_nodeCount.Location = new System.Drawing.Point(105, 13);
+            this.lb_nodeCount.Location = new System.Drawing.Point(105, 8);
             this.lb_nodeCount.Name = "lb_nodeCount";
             this.lb_nodeCount.Size = new System.Drawing.Size(29, 13);
             this.lb_nodeCount.TabIndex = 6;
@@ -98,7 +101,7 @@
             this.tb_Nodes.AcceptsReturn = true;
             this.tb_Nodes.AcceptsTab = true;
             this.tb_Nodes.BackColor = System.Drawing.SystemColors.Menu;
-            this.tb_Nodes.Location = new System.Drawing.Point(607, 58);
+            this.tb_Nodes.Location = new System.Drawing.Point(611, 58);
             this.tb_Nodes.Multiline = true;
             this.tb_Nodes.Name = "tb_Nodes";
             this.tb_Nodes.ReadOnly = true;
@@ -109,7 +112,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(604, 42);
+            this.label2.Location = new System.Drawing.Point(611, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 8;
@@ -118,7 +121,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(604, 469);
+            this.label3.Location = new System.Drawing.Point(611, 469);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(133, 13);
             this.label3.TabIndex = 10;
@@ -129,7 +132,7 @@
             this.tb_Enemies.AcceptsReturn = true;
             this.tb_Enemies.AcceptsTab = true;
             this.tb_Enemies.BackColor = System.Drawing.SystemColors.Menu;
-            this.tb_Enemies.Location = new System.Drawing.Point(607, 485);
+            this.tb_Enemies.Location = new System.Drawing.Point(611, 485);
             this.tb_Enemies.Multiline = true;
             this.tb_Enemies.Name = "tb_Enemies";
             this.tb_Enemies.ReadOnly = true;
@@ -140,7 +143,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(604, 250);
+            this.label4.Location = new System.Drawing.Point(611, 250);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 13);
             this.label4.TabIndex = 12;
@@ -151,7 +154,7 @@
             this.tb_Invalid.AcceptsReturn = true;
             this.tb_Invalid.AcceptsTab = true;
             this.tb_Invalid.BackColor = System.Drawing.SystemColors.Menu;
-            this.tb_Invalid.Location = new System.Drawing.Point(607, 266);
+            this.tb_Invalid.Location = new System.Drawing.Point(611, 266);
             this.tb_Invalid.Multiline = true;
             this.tb_Invalid.Name = "tb_Invalid";
             this.tb_Invalid.ReadOnly = true;
@@ -161,31 +164,53 @@
             // 
             // bt_Credits
             // 
-            this.bt_Credits.Location = new System.Drawing.Point(212, 8);
+            this.bt_Credits.Location = new System.Drawing.Point(187, 8);
             this.bt_Credits.Name = "bt_Credits";
-            this.bt_Credits.Size = new System.Drawing.Size(122, 23);
+            this.bt_Credits.Size = new System.Drawing.Size(145, 23);
             this.bt_Credits.TabIndex = 13;
             this.bt_Credits.Text = "Add Credits";
             this.bt_Credits.UseVisualStyleBackColor = true;
             this.bt_Credits.Click += new System.EventHandler(this.bt_Credits_Click);
             // 
+            // lb_charcount
+            // 
+            this.lb_charcount.AutoSize = true;
+            this.lb_charcount.Location = new System.Drawing.Point(16, 25);
+            this.lb_charcount.Name = "lb_charcount";
+            this.lb_charcount.Size = new System.Drawing.Size(66, 13);
+            this.lb_charcount.TabIndex = 14;
+            this.lb_charcount.Text = "0 characters";
+            // 
+            // HasStarter
+            // 
+            this.HasStarter.AutoSize = true;
+            this.HasStarter.Location = new System.Drawing.Point(611, 20);
+            this.HasStarter.Name = "HasStarter";
+            this.HasStarter.Size = new System.Drawing.Size(174, 17);
+            this.HasStarter.TabIndex = 15;
+            this.HasStarter.Text = "has at least one \"Starter Node\"";
+            this.HasStarter.UseVisualStyleBackColor = true;
+            // 
             // Output_Previewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 777);
+            this.ClientSize = new System.Drawing.Size(896, 741);
+            this.Controls.Add(this.HasStarter);
+            this.Controls.Add(this.lb_charcount);
             this.Controls.Add(this.bt_Credits);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.tb_Invalid);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.tb_Enemies);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.tb_Nodes);
             this.Controls.Add(this.lb_nodeCount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bt_Cancel);
             this.Controls.Add(this.bt_saveFile);
+            this.Controls.Add(this.tb_Invalid);
+            this.Controls.Add(this.tb_Enemies);
+            this.Controls.Add(this.tb_Nodes);
             this.Controls.Add(this.Textbox_PREVIEW);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Output_Previewer";
             this.Text = "Output_Previewer";
             this.Load += new System.EventHandler(this.Output_Previewer_Load);
@@ -208,5 +233,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tb_Invalid;
         private System.Windows.Forms.Button bt_Credits;
+        private System.Windows.Forms.Label lb_charcount;
+        private System.Windows.Forms.CheckBox HasStarter;
     }
 }

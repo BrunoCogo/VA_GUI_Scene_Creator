@@ -34,7 +34,7 @@ namespace VA_GUI
             log.Debug("Initiating Output Preview");
             if (placeNodes.Count == 0)
             {
-                log.Warn("WARNING - There is no nodes on the previewr to preview");
+                log.Warn("WARNING - There is no nodes on the previwer to preview");
             }
             InitializeComponent();
             NodeCollection = placeNodes;
@@ -96,6 +96,7 @@ namespace VA_GUI
 
         void GenerateFile()
         {
+            bool hasstarter = false;
             Textbox_PREVIEW.Text += "2.0.0\r\n";
             Textbox_PREVIEW.Text += "#File Created in VA_GUI by Cogo";
             Textbox_PREVIEW.Text += L;
@@ -121,6 +122,7 @@ namespace VA_GUI
             Textbox_PREVIEW.Text += "#__________End Credits____________________" + L + L;
 
             //
+          
 
             WasReferencedList = new List<string>();
             InvalidReferencedList = new List<string>();
@@ -129,9 +131,12 @@ namespace VA_GUI
 
             foreach (Node node in NodeCollection)
             {
+                if (node.ProticeStart) { hasstarter = true; }
                 TranslateNode(node);
             }
-
+            HasStarter.Checked = hasstarter;
+            lb_nodeCount.Text = NodeCollection.Count.ToString();
+            lb_charcount.Text = Textbox_PREVIEW.Text.Length.ToString() + " Characters";
             log.Info("This place \""+ myName +"\" has finish being interpreted as a vgp file, Output on textbox");
 
             UpdateSideAssistaint();
@@ -169,6 +174,11 @@ namespace VA_GUI
                     }
 
                     Textbox_PREVIEW.Text += "describe:" + thisNode.Description + ";" + L;
+                    if (thisNode.ProticeStart)
+                    {
+                        SetReference(thisNode.Name);
+                        Textbox_PREVIEW.Text += "chance: " + thisNode.chance.ToString() + ";" + L;
+                    }
 
 
 
@@ -179,7 +189,12 @@ namespace VA_GUI
                     Textbox_PREVIEW.Text += "title:" + thisNode.Title + ";" + L;
                     Textbox_PREVIEW.Text += "type:" + "nothing" + ";" + L;
                     Textbox_PREVIEW.Text += "description:" + thisNode.Description + ";" + L;
-                    
+                    if (thisNode.ProticeStart)
+                    {
+                        SetReference(thisNode.Name);
+                        Textbox_PREVIEW.Text += "chance: " + thisNode.chance.ToString() + ";" + L;
+                    }
+
 
                     break;
 

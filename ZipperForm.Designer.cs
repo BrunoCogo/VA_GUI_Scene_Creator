@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ZipperForm));
             this.PlacesCheckList = new System.Windows.Forms.CheckedListBox();
             this.EnemyChecklist = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -91,6 +92,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.EnemyChecklist);
             this.Controls.Add(this.PlacesCheckList);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ZipperForm";
             this.Text = "ZipperForm";
             this.Load += new System.EventHandler(this.ZipperForm_Load);

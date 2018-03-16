@@ -35,6 +35,7 @@
             this.bt_LoadCustom = new System.Windows.Forms.Button();
             this.bt_ExportCustom = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.cb_battleDesc = new System.Windows.Forms.CheckBox();
             this.cb_StarterAdeventure = new System.Windows.Forms.CheckBox();
             this.Num_Chance = new System.Windows.Forms.NumericUpDown();
@@ -71,6 +72,7 @@
             this.bt_delPlace = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.bt_importZip = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Chance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb_chance)).BeginInit();
@@ -108,6 +110,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.cb_battleDesc);
             this.panel1.Controls.Add(this.cb_StarterAdeventure);
             this.panel1.Controls.Add(this.Num_Chance);
@@ -140,6 +143,20 @@
             this.panel1.Size = new System.Drawing.Size(846, 537);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button3.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button3.Location = new System.Drawing.Point(408, 495);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(145, 27);
+            this.button3.TabIndex = 34;
+            this.button3.Text = "Add Node (wizard)";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // cb_battleDesc
             // 
@@ -321,6 +338,7 @@
             // 
             // cb_CurrentNode
             // 
+            this.cb_CurrentNode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_CurrentNode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.cb_CurrentNode.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cb_CurrentNode.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -330,8 +348,10 @@
             this.cb_CurrentNode.Location = new System.Drawing.Point(559, 4);
             this.cb_CurrentNode.Name = "cb_CurrentNode";
             this.cb_CurrentNode.Size = new System.Drawing.Size(241, 23);
+            this.cb_CurrentNode.Sorted = true;
             this.cb_CurrentNode.TabIndex = 5;
             this.cb_CurrentNode.SelectedIndexChanged += new System.EventHandler(this.cb_CurrentNode_SelectedIndexChanged);
+            this.cb_CurrentNode.Validating += new System.ComponentModel.CancelEventHandler(this.cb_CurrentNode_Validating);
             // 
             // label1
             // 
@@ -367,7 +387,7 @@
             this.bt_AddNode.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bt_AddNode.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_AddNode.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.bt_AddNode.Location = new System.Drawing.Point(444, 495);
+            this.bt_AddNode.Location = new System.Drawing.Point(296, 495);
             this.bt_AddNode.Name = "bt_AddNode";
             this.bt_AddNode.Size = new System.Drawing.Size(106, 27);
             this.bt_AddNode.TabIndex = 10;
@@ -637,12 +657,27 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // bt_importZip
+            // 
+            this.bt_importZip.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_importZip.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bt_importZip.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_importZip.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.bt_importZip.Location = new System.Drawing.Point(474, 9);
+            this.bt_importZip.Name = "bt_importZip";
+            this.bt_importZip.Size = new System.Drawing.Size(148, 27);
+            this.bt_importZip.TabIndex = 30;
+            this.bt_importZip.Text = "Import VAGUI Zip";
+            this.bt_importZip.UseVisualStyleBackColor = true;
+            this.bt_importZip.Click += new System.EventHandler(this.bt_importZip_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.ClientSize = new System.Drawing.Size(855, 623);
+            this.Controls.Add(this.bt_importZip);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_delPlace);
@@ -655,6 +690,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Vore Adventure Scene Editor By Cogo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -708,6 +744,8 @@
         private System.Windows.Forms.DataGridViewButtonColumn cl_del;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button bt_importZip;
     }
 }
 

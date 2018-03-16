@@ -1,0 +1,15 @@
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\bin\Release\VA_GUI.exe.config
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\bin\Release\VA_GUI.exe
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\bin\Release\VA_GUI.pdb
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\bin\Release\log4net.dll
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\bin\Release\log4net.xml
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.Credits.resources
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.Form1.resources
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.Output_Previewer.resources
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.Properties.Resources.resources
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.ZipperForm.resources
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.csproj.GenerateResource.Cache
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.csproj.CoreCompileInputs.cache
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.exe
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.pdb
+A:\CurrentProjects\VASceneCreator\VA_GUI_Scene_Creator\obj\Release\VA_GUI.csprojResolveAssemblyReference.cache

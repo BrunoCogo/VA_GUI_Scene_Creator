@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SessionSeriasable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <keys>
+    <string>Bar</string>
+    <string>BattleTest</string>
+    <string>Hotel</string>
+    <string>Pool</string>
+  </keys>
+  <NSerias>
+    <ArrayOfNodeSeria>
+      <NodeSeria>
+        <ID>BarEntry</ID>
+        <Name>12</Name>
+        <Title> Bar</Title>
+        <Type>noncombat</Type>
+        <OptionCount>4</OptionCount>
+        <OptionIDLink>
+          <string>121</string>
+          <string>122</string>
+        </OptionIDLink>
+        <Description> At first glance, this is a normal bar... well, that is excluding that the bartender is a two-legged griffin, at least she seems like it with the bird-like features, blueish tone of the feathers and lion-like tail. There's also a lion on one of the tables, he is looking bored and quite down. You could go and talk to him. there's also a rat sit on the pod of the bottle, he looks weirdly each time the bartender looked at him. You could just sit, drink, and ignore everything else</Description>
+        <ProticeStart>true</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>1</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>DrunkenFightLion</ID>
+        <Name>121</Name>
+        <Title>Go talk with the lion</Title>
+        <Type>combat</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <EnemyToFight>DraeDrunk</EnemyToFight>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>true</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>Griffintalk</ID>
+        <Name>122</Name>
+        <Title> Talk to griffin</Title>
+        <Type>noncombat</Type>
+        <OptionCount>3</OptionCount>
+        <OptionIDLink>
+          <string>drawExcuseAndLeave</string>
+        </OptionIDLink>
+        <Description> You sat down infront of the griffin. "Nice bar you got here." You said. She stops and notice that you are talking to her. Quikly, she respoded "Yeah, it's kind of nice when is not full of depress ghosts. What brings you here" - "not much, I saw the town and it feels kind of familiar, I guess I'm just passing through". She looks tempted "Oh nice, So you are the adventurer I been hearing about. I would like to invite you to my room below the bar. capishi?".  You sence that something was not right tho.</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>BarGrifLeave</ID>
+        <Name>drawExcuseAndLeave</Name>
+        <Title> Create an excitement</Title>
+        <Type>nothing</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <Description> You blushed a bit before saying "Sorry, mam... I thing someone is waiting for me outside, I'll be back someday". You got up from your seat and go to the door. When you look back the Griff look with a face between desdeption and boredness. Back to you adventure.</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+    </ArrayOfNodeSeria>
+    <ArrayOfNodeSeria>
+      <NodeSeria>
+        <ID>ArenaTestSelection</ID>
+        <Name>ArenaSelection</Name>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>2</string>
+        </OptionIDLink>
+        <Description>You see a tend in the middle of the forest.As you go in, you saw a poster board with a question. "Who a you willing to fight?".</Description>
+        <ProticeStart>true</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>1</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>Fightfox</ID>
+        <Name>2</Name>
+        <Title>Forest Fox</Title>
+        <Type>combat</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <EnemyToFight>Fox</EnemyToFight>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>true</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+    </ArrayOfNodeSeria>
+    <ArrayOfNodeSeria>
+      <NodeSeria>
+        <ID>HotelReception</ID>
+        <Name>11</Name>
+        <Title> Hotel</Title>
+        <Type>noncombat</Type>
+        <OptionCount>2</OptionCount>
+        <OptionIDLink>
+          <string>111</string>
+        </OptionIDLink>
+        <Description> You enter on a building that resembles as an hotel. You see a hall that have several doors.</Description>
+        <ProticeStart>true</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>1</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>HotelHalls</ID>
+        <Name>111</Name>
+        <Title> Go To the Halls</Title>
+        <Type>noncombat</Type>
+        <OptionCount>4</OptionCount>
+        <OptionIDLink>
+          <string>1111</string>
+          <string>1112</string>
+          <string>1113</string>
+          <string>1114</string>
+        </OptionIDLink>
+        <Description> The Surroundings are as you would expect. You see 4 doors that are almost open. the first one seems normal, you can hear the movement of 4 paws moving around that door. On the second one you reach to see burn marks below the door. On the third one you see a fox-like silhouette peeking at the door and a tail swinging smoothly towards and away of the room, like a sort of invitation. The last one is more strange, but you didn't knew why.</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>Room1FerralWolf</ID>
+        <Name>1111</Name>
+        <Title> Enter Room 1</Title>
+        <Type>noncombat</Type>
+        <OptionCount>3</OptionCount>
+        <OptionIDLink>
+          <string>11111</string>
+          <string>11112</string>
+        </OptionIDLink>
+        <Description> You peeked for curiosity to see what was behind the first door. You thought there was someone where not so long ago. After some steps into the room the door shuts thigh by a feral wolf that snaked behind it. "Well, well, well, I started to feel hungry and was planing to go outside and eat," the wolf says in a evil grin on his face, "but you know, you just save me a lot of time, so tell me how do you want to go in? let's be honest here, it's your only way you get out of here alive." The wolf is little more your size, maybe you can fight him.</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>GoAlongHotelWolf</ID>
+        <Name>11111</Name>
+        <Title> Go Along</Title>
+        <Type>noncombat</Type>
+        <OptionCount>3</OptionCount>
+        <OptionIDLink>
+          <string>111111</string>
+          <string>111112</string>
+          <string>111113</string>
+        </OptionIDLink>
+        <Description> You though to yourself that fighting would only worsen the things for you to the point of no return. You breath deeply as you summit to the feral wolf. "I know you understand, you are pretty clever by giving yourself up. As I token the wise ones, I'll let you choose whether butt or mouth, choose"</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>HandsOnMuzzle</ID>
+        <Name>111111</Name>
+        <Title> Move your hand toward the wolf's mouth.</Title>
+        <Type>noncombat</Type>
+        <OptionCount>2</OptionCount>
+        <OptionIDLink>
+          <string>1111111</string>
+          <string>1111112</string>
+        </OptionIDLink>
+        <Description> You move your hand and put it in front of the wolf. To your surprise, the wolf puts a friendly expression on his muzzle before surrounding your hands with his tongue. He stops and says "OK, don't struggle...much. You won't be digested if you obey at least at the beginning." You where about to say something, but the wolf wolfs you down bit by bit, and fast. First your arms, next to your head, moving to the rest of your body. Your size was clearly no problem to the wolf for the easiness in which he glup you. You slided to your temporal prison. The stomach seems to be able to stretch a lot, however you are still squished to a position that leaves you almost immobile. The wolf flips so that his belly is upward and you are press against his back."Now, I'll lay here and you stay there, I'll realize you when I'm satisfy, so I'll recommend start moving or just relax inside this body." Now what?</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>GetSitByWolf</ID>
+        <Name>111112</Name>
+        <Title> Sit behind the Wolf</Title>
+        <Type>noncombat</Type>
+        <OptionCount>2</OptionCount>
+        <OptionIDLink>
+          <string>1111121</string>
+          <string>1111122</string>
+        </OptionIDLink>
+        <Description> After some hesitation, you go behind the wolf and sit on the floor. After some preparation of the wolf, he sat upon your head and started to engulf it, he continue to put more of your body inside of him. The flesh, although stretchy, slided hardly around you. the wolf stops after his but cheeks where near to your leap. You could hear the wolf's heart bearing and some of the pleasure moans of the wolf. He then lift his but a few inches up only to drop it again. He continues to do so for no more than an hour. The wolf rest for a moment still siting on you with your legs still out. you move your torso in hope to get the attention of the wolf, "Calm down, I really doubt you are not enjoying this as much as I am." He proceeds to lift his ass up wards and then press your feet against the wall pushing you deeper. You get squirm by the intestines, curiously, for more that the intestines try to push you deeper, something is holding you in a way that you cannot advance or go back. "That's feels awesome, I love how the bulk gets formed, It's just too relaxing. See ya till noon" </Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>Sleep</ID>
+        <Name>1111121</Name>
+        <Title> Sleep</Title>
+        <Type>nothing</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <Description> you see no other option that's worth your time and place yourself in a comfortable position</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>SlideDownWolf</ID>
+        <Name>111113</Name>
+        <Title> Go for the under privet</Title>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>WaitWolfBalls1</string>
+        </OptionIDLink>
+        <Description> After a bizarre thought, you go under the wolf and you try touch the wolf's private. "Wait, what?! well. You are crazy if you want to go there, but heck it, who am I to deny you that wish". He slowly starts to lower his body pressing you, "sorry, I'm not used to this... could you rub 'it'?" You do as you were told and rub the shaft causing it to grow. "ok, here we go..." You were press against the wolf's straight shaft. You started with your hands, then the arms and your head. You were started to get inside but the wolf suddenly sit on his back legs causing your body to got lift in the air and slowly sliding downward the ball sack of the wolf. The ending of your sliding trip finished in you curled up inside the wolf balls. The wolf pants in excitement and satisfaction. The wolf outside pushes his filled balls against the floor, squishing you in the proses.From time to time, you see a lot of cum pile up all the way to your chin and then gets shoot up wards, it seems that the wolf is holding firmly his shaft to avoid you to get out with the cum shoot. Now all you can do is wait</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>WaitWolfBalls1</ID>
+        <Name>WaitWolfBalls1</Name>
+        <Title> Sleep</Title>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>WaitWolfBalls2</string>
+        </OptionIDLink>
+        <Description> You started to sleep inside, but the wolf didn't let you sleep by the constant panting of his and continues to shoot cum. He continues</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>WaitWolfBalls2</ID>
+        <Name>WaitWolfBalls2</Name>
+        <Title> Relax</Title>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>WaitWolfBalls3</string>
+        </OptionIDLink>
+        <Description> Unable to sleep, you relax as the wolf stoked his shaft and pressed his ball sack unto different stuff. You believe that he even pressed his balls inside the toilet. This continues for 3 hours with the wolf panting and squishing. He finishes by instantly sleeping belly downward and shaft pressed to the floor with his full body weight on top of it</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>WaitWolfBalls3</ID>
+        <Name>WaitWolfBalls3</Name>
+        <Title> Take advantage and sleeps</Title>
+        <Type>nothing</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <Description> After a few hours you finally could rest. The Wolf was already asleep and you weren't moving or weren't been squished in strange objects. You slept easily with the slight motion up wards. After a few hours you got woke up by the movement of the wolf. "YAAWN... What happen yesterday?" he speaks softly, "I remember this stranger breaking into my room and...wait" He stops and touches his ball sack with his back legs, "Are you still there?! Hey, yesterday was awesome, I need to do that more often. I'll realice you in a moment as promise." He moves outside the room, outside the hotel and goes behind a trash bin. He lift his back leg and starts pushing you upward. The wolf pushed a lot to get you out. When you came out, there was a pond of cum surrounding you. You got up with the wolf's sticky seed all over your body. "Make sure you don't invade my space anymore unless you want to repeat last night", he turns and starts walking, then he stops and turns to you with a lustful grin on his face,"... and you are mostly welcome to" he added. Ok...   , back to your business</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>FightHotelWolfWolf</ID>
+        <Name>11112</Name>
+        <Title>Fight him!</Title>
+        <Type>combat</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <EnemyToFight>HotelWolf2</EnemyToFight>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>true</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>Room2AnthroDragon</ID>
+        <Name>1112</Name>
+        <Title>Enter Room 2</Title>
+        <Type>noncombat</Type>
+        <OptionCount>2</OptionCount>
+        <OptionIDLink>
+          <string>wakeDragonRoom</string>
+          <string>LeaveDragonRoom</string>
+        </OptionIDLink>
+        <Description> You walked straight to the door number 2, hum... it's not close. In the middle of the room laid a sleeping anthro dragon. The dragon seems so peaceful at sight... and big... definitly big, wake him up?</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>DragonRoot1</ID>
+        <Name>wakeDragonRoom</Name>
+        <Title> Yes</Title>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>hi</string>
+        </OptionIDLink>
+        <Description> With your mischibusnes, you tried to wake the sleeping dragon. From scraching his paws, to screaming in his ears. You where about to give up until you got a bizarre idea. You position yourself over the dragon and jumped on his belly repitetly. The dragon let out some air before opening his eyes, he grabs you his hand and holds you in front of his face.</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>Wakedthedragon</ID>
+        <Name>hi</Name>
+        <Title> *-* "hi" </Title>
+        <Type>nothing</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <Description> with not much options you said the first thing that comes to your mind "hum... hi". The dragon, irritaded, heads towards the window. He opens it and gets ready to a baseball throw. "let!... me!... sleep!" He said simultanusly as he gains speed for the throw. you gluped before being thrown out of the hotel... and the city itself. You landed safely on top of a bush admiting to yourself, "He definitly knows how to throw..."</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>Room3AnthroFox</ID>
+        <Name>1113</Name>
+        <Title> Go into Room 3</Title>
+        <Type>noncombat</Type>
+        <OptionCount>2</OptionCount>
+        <OptionIDLink>
+          <string>BattleHotelRoom3Fox</string>
+          <string>GiveinFoxRm2</string>
+        </OptionIDLink>
+        <Description>    Your curiosity lingers from the sweat in your forehead to the blood in your veins. You decided to investigate the tempting invitation. For Your surprise it was a white female fox, about your size, who was waiting for you behind the door. "Hello there, my dear" She said, you responded "Do we know each other?" - "perhaps not in your lifetime, but I know you have meet me before. And here we are again. Are you gonna finish what I started?". As you tried to approach the door again, she shuts it forcefully with a magic spell. "Come on darling, what about if we discust this..." she stops as her eyes began to shine a rather attractive yellow, then resumes "is all about perspective isn't it?"     You start feeling weird... was the whole world that big before? oh... The fox says "Now little heart, are you still with me or what? no harm needs to be done." You could fight your way out of here but with the size of an ant its a great risk, plus if she gets you, there is not comming back.</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>FighingRoom2</ID>
+        <Name>FightFoxRoom2</Name>
+        <Title>Fight to the ending</Title>
+        <Type>combat</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <EnemyToFight>Room2Fox</EnemyToFight>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>true</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>GiveinFoxRm2</ID>
+        <Name>GiveinFoxRm2</Name>
+        <Title> Summit</Title>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>sleepInsideFox</string>
+        </OptionIDLink>
+        <Description> You consider your risks and decide to go with the flow. "See, No harm made." She grabed you. Then she started to lick all over you. You worried that you might not be able to see the light of day. "Now where were?" She smiles as she holds you with only one hand. "Now lisent, You go in and start sleeping, ok" You felt you heartbeat stops for a moment. You came back to your sences as she was getting your tiny body near her slit. You felt every movement that she did when she shovel your legs inside, she was ready to unbirth you. You started screaming but she cover your mouth with her finger "You'll be safe, and you will be right back in a few hours." You slided across her birthing canal and finally arived to your destination. You are able to streach your body condidering the differences in sides. "Oh,yes! Now relax, sweatheart. The faster you sleep the faster you will get out." Seem like there is no escape, now you have to sleep around her jucies.</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>SlFoxComplet</ID>
+        <Name>sleepInsideFox</Name>
+        <Title> Sleep</Title>
+        <Type>nothing</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <Description> You close your eyes hopeing that that fox keeps true to her word. After a sleep, you wake up still inside of her and this time, you are summerged in her jucies. The only thing that keeps you for drauning inside of here was a bubble surrounding your nose and mouth. You tried to push to the nearest thing to you. "Oh... my... my. You're quite the sleepyhead, are you? I never thought I could spend to much time with you. Did you enjoyed yourself this past 3 weeks." you where shocked that three weeks have pass even though you felt like you slept from night to morning. The fox started pushing. You feel yourself pushed along the canal, the more you where pushed to your liberty, the more your body grown inside the canal. After some efforts of the fox and a few pleasure moans, you where out. You open your eyes to discover you are infront of the city and the fox is nowhere to be seen. There is a writing on the ground made of the jucies of the fox, "see ya around, sweetheart )"</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>BattleHotelRoom3Fox</ID>
+        <Name>11132</Name>
+        <Title>Fight against the fox</Title>
+        <Type>combat</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <EnemyToFight>Room2Fox</EnemyToFight>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>true</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+    </ArrayOfNodeSeria>
+    <ArrayOfNodeSeria>
+      <NodeSeria>
+        <ID>PoolExploration</ID>
+        <Name>112</Name>
+        <Title>Check the pool outside</Title>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>WaitForUpdate</string>
+        </OptionIDLink>
+        <Description>You walk to the back part of the hotel towards the pool. You where greated my a sight that came to be little arousing for you. On the pool there was a ocean whale with her belly up showing off here new bikiny... it dosent cover what it supposed to... Next to it you see a anthropomorphic dragon laying back taking the sun. Who are you going to approach</Description>
+        <ProticeStart>true</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>1</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>UpdatePlaceHolderPool</ID>
+        <Name>WaitForUpdate</Name>
+        <Title> Hu...Maybe next update</Title>
+        <Type>nothing</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <Description> .You looked on the side and there was a sign... "Because of outside causes of this wolrd, it is not recommendable for you to interact with stuff that is just not there yet. We advice you to wait". Teased, you puted a note on the ground advising the author of this mod to stop trying to break the four wall, you also added the request to update soon</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+    </ArrayOfNodeSeria>
+  </NSerias>
+</SessionSeriasable>

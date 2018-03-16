@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace VA_GUI
 {
-    static class Program
+    public static class Program
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
@@ -19,8 +19,6 @@ namespace VA_GUI
         [STAThread]
         static void Main()
         {
-            log.Error("Testing Error message");
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
