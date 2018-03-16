@@ -13,6 +13,8 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
+using System.Threading;
 
 namespace VA_GUI
 {
@@ -24,10 +26,13 @@ namespace VA_GUI
         /// 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        public SessionLS lSe = new SessionLS();
+        public PlaceDirectory prevSession;
+
         public List<Node> NodeLibraryList = new List<Node>();
         private List<string> EnemyLibrary = new List<string>();
         public List<string> PlacesName;
-        public Dictionary<string, List<Node>> PlaceDir = new Dictionary<string, List<Node>>();
+        public PlaceDirectory PlaceDir = new PlaceDirectory();
 
         private List<List<string>> RawNodeCollection;
 
@@ -38,6 +43,28 @@ namespace VA_GUI
             log.Debug("Inicated: Form1 - Main VAGUI Window");
             InitializeComponent();
             LoadCustom();
+            LoadSession();
+        }
+
+        public void LoadSession()
+        {
+            log.Info("Loading intizialided");
+            prevSession = lSe.LoadPreviousSession().ToPlaceDirectory();
+            //Merge already loaded PlaceDir with prev session list
+            PlaceDir.Merge(prevSession);
+            foreach (string key in PlaceDir.Dir.Keys)
+            {
+                foreach (Node n in PlaceDir.Dir[key])
+                {
+                    n.RelateOptions(PlaceDir.Dir[key]);
+                }
+            }
+            UpdateWorkspace();
+        }
+
+        public void SaveSession()
+        {
+
         }
 
         #region Funcionality Methods
@@ -45,7 +72,7 @@ namespace VA_GUI
         public void UpdateWorkspace()
         {
             cb_place.Items.Clear();
-            foreach (string place in PlaceDir.Keys.ToList())
+            foreach (string place in PlaceDir.Dir.Keys.ToList())
             {
                 cb_place.Items.Add(place.Replace("\\custom\\places\\", ""));
             }
@@ -54,10 +81,11 @@ namespace VA_GUI
         /// <summary>Modifies the node library by the one selected in the "Places" combobox.</summary>
         public void ModifyWorkspace(object sender, EventArgs e)
         {
+            log.Info("Changing places");
             try
             {
                 NodeLibraryList.Clear();
-                foreach (Node node in PlaceDir[cb_place.SelectedItem.ToString()])
+                foreach (Node node in PlaceDir.Dir[cb_place.SelectedItem.ToString()])
                 {
                     NodeLibraryList.Add(node);
                 }
@@ -90,9 +118,12 @@ namespace VA_GUI
                 num_OptionCount.Visible = false;
                 dgv_Olinking.Visible = false;
                 label6.Visible = false;
+
+                cb_CurrentNode.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
+                log.Error("Error changing places", ex);
                 MessageBox.Show("Error " + ex.ToString());
             }
 
@@ -105,7 +136,7 @@ namespace VA_GUI
             foreach (Node optionNode in NodeLibraryList)
             {
                 cl_OptionLink.Items.Add(optionNode.ID);
-                cb_CurrentNode.Items.Add(optionNode.Name);
+                cb_CurrentNode.Items.Add(optionNode.ID);
             }
         }
 
@@ -115,91 +146,97 @@ namespace VA_GUI
             #region verification
             try
             {
-                if (tb_Name.Text.Trim() != "" && tb_Title.Text.Trim() != "" && tb_Title.Text.Trim() != "" && cb_Type.SelectedItem.ToString().Trim() != "")
+                if (cb_place.Text.ToString() != "")
                 {
-                    //Successful node
 
-                    Node newNode = new Node(tb_ID.Text, tb_Name.Text, tb_Title.Text, InterpretNodeType(cb_Type.SelectedItem.ToString()), tb_Desc.Text, cb_StarterAdeventure.Checked, Num_Chance.Value);
+                    if (tb_Name.Text.Trim() != "" && tb_Title.Text.Trim() != "" && tb_Title.Text.Trim() != "" && cb_Type.SelectedItem.ToString().Trim() != "")
+                    {
+                        //Successful node
 
-                    Node found = null;
-                    bool isFound = false;
-                    bool byName = false;
-                    bool byID = false;
-                    foreach (Node node in NodeLibraryList)
-                    {
-                        if (node.Name == newNode.Name)
+                        Node newNode = new Node(tb_ID.Text, tb_Name.Text, tb_Title.Text, InterpretNodeType(cb_Type.SelectedItem.ToString()), tb_Desc.Text, cb_StarterAdeventure.Checked, Num_Chance.Value);
+
+                        Node found = null;
+                        bool isFound = false;
+                        bool byName = false;
+                        bool byID = false;
+                        foreach (Node node in NodeLibraryList)
                         {
-                            found = node;
-                            isFound = true;
-                            byName = true;
-                            break;
+                            if (node.Name == newNode.Name)
+                            {
+                                found = node;
+                                isFound = true;
+                                byName = true;
+                                break;
+                            }
+                            if (node.ID == newNode.ID)
+                            {
+                                found = node;
+                                isFound = true;
+                                byID = true;
+                                break;
+                            }
                         }
-                        if (node.ID == newNode.ID)
+                        if (!isFound)
                         {
-                            found = node;
-                            isFound = true;
-                            byID = true;
-                            break;
-                        }
-                    }
-                    if (!isFound)
-                    {
-                        log.Debug("No Node Dups Found, procceding with Adding node to Node Directory");
-                        newNode.GetOptions(this);
-                        if (cb_EnemyLink.SelectedItem == null)
-                        {
-                            newNode.EnemyToFight = "";
+                            log.Debug("No Node Dups Found, procceding with Adding node to Node Directory");
+                            newNode.GetOptions(this);
+                            if (cb_EnemyLink.SelectedItem == null)
+                            {
+                                newNode.EnemyToFight = "";
+                            }
+                            else
+                            {
+                                newNode.EnemyToFight = cb_EnemyLink.SelectedItem.ToString();
+                            }
+                            NodeLibraryList.Add(new Node(tb_ID.Text, tb_Name.Text, tb_Title.Text, InterpretNodeType(cb_Type.SelectedItem.ToString()), tb_Desc.Text, cb_StarterAdeventure.Checked, Num_Chance.Value));
+                            cb_CurrentNode.Items.Add(newNode.ID);
+                            cb_CurrentNode.SelectedIndex = cb_CurrentNode.Items.IndexOf(newNode.ID);
+                            ModifyDGVOptions();
+
                         }
                         else
                         {
-                            newNode.EnemyToFight = cb_EnemyLink.SelectedItem.ToString();
+
+                            string Mess;
+                            string Cap;
+                            if (byName && !byID)
+                            {
+                                Mess = "Failed to add node: A Node with the same Name has been detected:\n" +
+                                    found.ToString() + "\n";
+                                Cap = "Duplicated Name";
+                            }
+                            else if (!byName && byID)
+                            {
+                                Mess = "Failed to add node: A Node With the same ID has been detected:\n";
+                                Cap = "Duplicated ID";
+                            }
+                            else
+                            {
+                                Mess = "Failed to add node: A Node With the same ID and Name has been detected";
+                                Cap = "Duplicated Name & Id";
+                            }
+                            log.Warn(Cap + " - " + Mess);
+                            MessageBox.Show(Mess, Cap);
                         }
-                        NodeLibraryList.Add(new Node(tb_ID.Text, tb_Name.Text, tb_Title.Text, InterpretNodeType(cb_Type.SelectedItem.ToString()), tb_Desc.Text, cb_StarterAdeventure.Checked, Num_Chance.Value));
-                        cb_CurrentNode.Items.Add(newNode.ID);
-                        cb_CurrentNode.SelectedIndex = cb_CurrentNode.Items.IndexOf(newNode.ID);
-                        ModifyDGVOptions();
 
                     }
                     else
                     {
-                        
-                        string Mess;
-                        string Cap;
-                        if (byName && !byID)
-                        {
-                            Mess = "Failed to add node: A Node with the same Name has been detected:\n" +
-                                found.ToString() + "\n";
-                            Cap = "Duplicated Name";
-                        }
-                        else if (!byName && byID)
-                        {
-                            Mess = "Failed to add node: A Node With the same ID has been detected:\n";
-                            Cap = "Duplicated ID";
-                        }
-                        else
-                        {
-                            Mess = "Failed to add node: A Node With the same ID and Name has been detected";
-                            Cap = "Duplicated Name & Id";
-                        }
-                        log.Warn(Cap + " - " + Mess);
-                        MessageBox.Show(Mess, Cap);
+                        MessageBox.Show("A Value of the Node is unfilled and it can not be represented as a 'good node'\n" +
+                                        "Please make sure that the following fields are filled:\n" +
+                                        "ID\n" +
+                                        "Name\n" +
+                                        "Title\n" +
+                                        "Type\n\n" +
+                                        "The Node will not be added while any of these are unfilled. Fill them and try again.", "Error Creating Node");
+                        log.Error("Failed To Add Node - A field was not filled");
+
                     }
 
                 }
-                else
-                {
-                    MessageBox.Show("A Value of the Node is unfilled and it can not be represented as a 'good node'\n" +
-                                    "Please make sure that the following fields are filled:\n" +
-                                    "ID\n" +
-                                    "Name\n" +
-                                    "Title\n" +
-                                    "Type\n\n" +
-                                    "The Node will not be added while any of these are unfilled. Fill them and try again.", "Error Creating Node");
-                    log.Error("Failed To Add Node - A field was not filled");
-
-                }
-
+                else { MessageBox.Show("No place selected to place node with. Process canceled."); log.Warn("tried to add node to an non-existant place"); return; }
             }
+            
             catch (Exception ex)
             {
                 MessageBox.Show("An error occured while trying to add a Node; please fill in all main fields \n" +
@@ -238,12 +275,26 @@ namespace VA_GUI
             List<List<string>> NodeCollection = new List<List<string>>();
             bool NodeStart = false;
             string line;
+            int lineNum = 0;
+
+
+            int nodeRead = 0;
+            log.Debug("Reading File: " + _path);
 
             while ((line = File.ReadLine()) != null)
             {
-                if (line.Contains("["))
+                lineNum++;
+
+                if (line.Contains("[") && NodeStart == false)
                 {
+                    nodeRead++;
+                    log.Debug("Starting to read node #" + nodeRead);
                     NodeStart = true;
+                }
+                else if(line.Contains("[") && NodeStart == false)
+                {
+                    MessageBox.Show("Error reading a node\nAnother node was started but didn't reach the end before trying to read another node");
+                    log.Error("Error reading a file: \n" + Path.GetFileNameWithoutExtension(_path) + "\n" + "Line: " + lineNum);
                 }
 
                 if (NodeStart == true)
@@ -253,12 +304,14 @@ namespace VA_GUI
 
                 if (line.Contains("];"))
                 {
+                    log.Debug("Finish reading node #" + nodeRead);
                     NodeCollection.Add(Node.ToList<string>());
                     NodeStart = false;
                     Node.Clear();
                 }
             }
 
+            log.Info("File Successfully closed");
             File.Close();
             return NodeCollection;
 
@@ -291,9 +344,12 @@ namespace VA_GUI
                             {
                                 if (NodeLibraryList[i].ID == IDTarget)
                                 {
+                                    log.Info("Successfully obtained Node with ID of: " + IDTarget);
                                     return NodeLibraryList[i];
                                 }
                             }
+                            log.Info("No Node with ID of: " + IDTarget + " was found");
+
                             return null;
             }
             catch (Exception ex)
@@ -332,9 +388,9 @@ namespace VA_GUI
         public void AddPlace(string NewPlaceName)
         {
             log.Debug("Adding " + NewPlaceName);
-            if (!PlaceDir.ContainsKey(NewPlaceName))
+            if (!PlaceDir.Dir.ContainsKey(NewPlaceName))
             {
-                PlaceDir.Add(NewPlaceName, new List<Node>());
+                PlaceDir.Dir.Add(NewPlaceName, new List<Node>());
             }
             else {
                 log.Warn("There is a Place already in the list with that name");
@@ -366,7 +422,7 @@ namespace VA_GUI
                     Directory.CreateDirectory(path + EnemyPathAddon);
                 }
             }
-
+            log.Info("EnemyList Cleared");
             EnemyLibrary.Clear();
             EnemyLibrary = GetEnemies(path + EnemyPathAddon);
             #region Place Processing
@@ -398,10 +454,10 @@ namespace VA_GUI
                         placeNodes[i].RelateOptions(placeNodes);
                     }
 
-                    if (!PlaceDir.ContainsKey(placeFile.Replace(path, "").Replace(".vgp", "")))
+                    if (!PlaceDir.Dir.ContainsKey(placeFile.Replace(path, "").Replace(".vgp", "")))
                     {
                         log.Debug("Added " + placeFile.Replace(path, "").Replace("\\custom\\places\\", "").Replace(".vgp", ""));
-                        PlaceDir.Add(placeFile.Replace(path, "").Replace("\\custom\\places\\", "").Replace(".vgp", ""), placeNodes.ToList());
+                        PlaceDir.Dir.Add(placeFile.Replace(path, "").Replace("\\custom\\places\\", "").Replace(".vgp", ""), placeNodes.ToList());
                     }
                 }
             }
@@ -438,7 +494,7 @@ namespace VA_GUI
 
         private void bt_AddNode_Click(object sender, EventArgs e)
         {
-            log.Debug("Added Node");
+            log.Info("Added Node");
             addNewNodeToList();
             UpdatePlaceDir();
         }
@@ -451,7 +507,7 @@ namespace VA_GUI
             tb_Name.Text = "";
             tb_ID.Text = "";
             tb_Desc.Text = "";
-            cb_Type.Text = "";
+            cb_Type.Text = Node.NodeType.nothing.ToString();
             cb_StarterAdeventure.Checked = false;
             tb_chance.Value = 0;
             Num_Chance.Value = 0;
@@ -465,29 +521,31 @@ namespace VA_GUI
         /// </summary>
         private void ct_Delete_Click(object sender, EventArgs e)
         {
-            try
+            if (Interaction.MsgBox("Are you sure you want to delete node '"+cb_CurrentNode.Text+"'? if it wasn't saved before you wont be able to recover the work in the node", MsgBoxStyle.YesNo) == MsgBoxResult.Yes)
             {
-                NodeLibraryList.Remove(GetFromListName(cb_CurrentNode.SelectedItem.ToString()));
-                if (indexNode - 1 > 0)
+                try
                 {
-                    cb_CurrentNode.SelectedIndex = indexNode - 1;
-                }
-                else if (indexNode + 1 < cb_CurrentNode.Items.Count)
-                {
-                    cb_CurrentNode.SelectedIndex = indexNode + 1;
-                }
-                else
-                {
-                    cb_CurrentNode.SelectedIndex = -1;
-                }
+                    NodeLibraryList.Remove(GetFromListName(cb_CurrentNode.SelectedItem.ToString()));
+                    if (indexNode - 1 > 0)
+                    {
+                        cb_CurrentNode.SelectedIndex = indexNode - 1;
+                    }
+                    else if (indexNode + 1 < cb_CurrentNode.Items.Count)
+                    {
+                        cb_CurrentNode.SelectedIndex = indexNode + 1;
+                    }
+                    else
+                    {
+                        cb_CurrentNode.SelectedIndex = -1;
+                    }
 
-                ModifyDGVOptions();
+                    ModifyDGVOptions();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please Select a node on the 'current node' Selector before deleting a node");
+                }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Please Select a node on the 'current node' Selector before deleting a node");
-            }
-           
         }
 
         /// <summary>
@@ -523,7 +581,8 @@ namespace VA_GUI
                     currentNode.OptionLinking.Add(dgv_Olinking.Rows[i].Cells[0].Value.ToString(), GetFromListName(dgv_Olinking.Rows[i].Cells[0].Value.ToString()));
                 }
                 currentNode.OptionCount = dgv_Olinking.RowCount - 1;
-                currentNode.chance = tb_chance.Value;
+                currentNode.chance = double.Parse( tb_chance.Value.ToString()) / 100;
+                currentNode.ProticeStart = cb_StarterAdeventure.Checked;
                 if (cb_EnemyLink.SelectedItem == null)
                 {
                     currentNode.EnemyToFight = "";
@@ -555,7 +614,11 @@ namespace VA_GUI
             if (cb_CurrentNode.SelectedItem != null)
             {
                 string test = cb_CurrentNode.SelectedItem.ToString();
-                currentNode = GetFromListName(cb_CurrentNode.SelectedItem.ToString());
+                currentNode = GetFromListID(cb_CurrentNode.SelectedItem.ToString());
+                if(currentNode ==  null)
+                { 
+                   currentNode = GetFromListName(cb_CurrentNode.SelectedItem.ToString());
+                }
             }
             else
             {
@@ -581,7 +644,10 @@ namespace VA_GUI
             }
             // dgv_Olinking
             cb_EnemyLink.Text = currentNode.EnemyToFight;
-            tb_chance.Value = Convert.ToInt16(currentNode.chance);
+            tb_chance.Value = Convert.ToInt16(currentNode.chance) * 100;
+            Num_Chance.Value = Convert.ToInt16(currentNode.chance);
+            cb_StarterAdeventure.Checked = currentNode.ProticeStart;
+            
         }
 
         /// <summary>
@@ -594,7 +660,7 @@ namespace VA_GUI
 
             const string EnemyPathAddon = @"\custom\monsters";
 
-            PlaceDir.Clear();
+            PlaceDir.Dir.Clear();
             PlacesName = Directory.EnumerateFiles(path + PlacesPathAddon).ToList<string>();
 
             EnemyLibrary.Clear();
@@ -625,9 +691,9 @@ namespace VA_GUI
                         placeNodes[i].RelateOptions(placeNodes);
                     }
 
-                    if (!PlaceDir.ContainsKey(placeFile.Replace(path, "").Replace(".vgp", "")))
+                    if (!PlaceDir.Dir.ContainsKey(placeFile.Replace(path, "").Replace(".vgp", "")))
                     {
-                        PlaceDir.Add(placeFile.Replace(path, "").Replace("\\custom\\places\\", "").Replace(".vgp", ""), placeNodes.ToList());
+                        PlaceDir.Dir.Add(placeFile.Replace(path, "").Replace("\\custom\\places\\", "").Replace(".vgp", ""), placeNodes.ToList());
                     }
                 }
             }
@@ -640,9 +706,13 @@ namespace VA_GUI
 
         private void bt_AddPlace_Click(object sender, EventArgs e)
         {
+            if (cb_place.Text == "")
+            {
+                cb_place.Text = Microsoft.VisualBasic.Interaction.InputBox("Please Enter the name for the new place:", "Place nameing","My Place");
+            }
             AddPlace(cb_place.Text);
             UpdateWorkspace();
-            cb_place.SelectedIndex = cb_place.Items.Count - 1;
+            cb_place.SelectedIndex = cb_place.Items.IndexOf(cb_place.Text);
         }
 
 
@@ -872,15 +942,18 @@ namespace VA_GUI
         {
             try
             {
-                log.Debug("Deleting place: " + cb_place.SelectedItem.ToString());
-                PlaceDir.Remove(cb_place.SelectedItem.ToString());
+                if (Interaction.MsgBox("Are you sure you want to delete '" + cb_place.Text + "' from the directory? No files will be afected but if you didn't had a file of this place before, it will not be recoverable.", MsgBoxStyle.YesNo) == MsgBoxResult.Yes)
+                {
+                    log.Debug("Deleting place: " + cb_place.SelectedItem.ToString());
+                    PlaceDir.Dir.Remove(cb_place.SelectedItem.ToString());
 
-                cb_place.Text = "";
-                UpdateWorkspace();
+                    cb_place.Text = "";
+                    UpdateWorkspace();
+                }
             }
             catch (Exception ex)
             {
-                log.Error("Error Deleting Place");
+                log.Error("Error Deleting Place", ex);
                 throw;
             }
             
@@ -917,22 +990,22 @@ namespace VA_GUI
         private void UpdatePlaceDir()
         {
             log.Debug(" Updating place directory ");
-            if (PlaceDir.Keys.Contains(cb_place.Text))
+            if (PlaceDir.Dir.Keys.Contains(cb_place.Text))
             {
-                PlaceDir[cb_place.Text].Clear();
-                PlaceDir[cb_place.Text].AddRange(NodeLibraryList);
+                PlaceDir.Dir[cb_place.Text].Clear();
+                PlaceDir.Dir[cb_place.Text].AddRange(NodeLibraryList);
             }
             else
             {
                 log.Debug("Place added to directory");
-                PlaceDir.Add(cb_place.Text, NodeLibraryList);
+                PlaceDir.Dir.Add(cb_place.Text, NodeLibraryList);
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             log.Info("Launching Exporter");
-            ZipperForm z = new ZipperForm(PlaceDir,EnemyLibrary);
+            ZipperForm z = new ZipperForm(PlaceDir.Dir,EnemyLibrary);
 
             if (z.ShowDialog() == DialogResult.OK)
             {
@@ -944,6 +1017,163 @@ namespace VA_GUI
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public void standaloneRelateOptions()
+        {
+            foreach (string key in PlaceDir.Dir.Keys)
+            {
+                List<Node> placeNodes = PlaceDir.Dir[key];
+                for (int i = 0; i < placeNodes.Count; i++)
+                {
+                    placeNodes[i].RelateOptions(placeNodes);
+                }
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            lSe.SaveSession(PlaceDir);
+        }
+
+        private void cb_CurrentNode_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            log.Info("Opening Node wizard");
+            if (cb_place.Text == "")
+            {
+                if (Interaction.MsgBox("No place has been selected, would you like to launch the 'add place' wizard?", MsgBoxStyle.YesNo) == MsgBoxResult.Yes)
+                {
+                    if (cb_place.Text == "")
+                    {
+                        cb_place.Text = Microsoft.VisualBasic.Interaction.InputBox("Please Enter the name for the new place:", "Place nameing", "My Place");
+                    }
+                    AddPlace(cb_place.Text);
+                    UpdateWorkspace();
+                    cb_place.SelectedIndex = cb_place.Items.IndexOf(cb_place.Text);
+
+                    Interaction.MsgBox("Place added succesfully, continuing the 'Node Creation' wizard", MsgBoxStyle.Information);
+                }
+                else
+                {
+
+                    log.Info("Exiting Node wizard early: No place to add node created");
+                    Interaction.MsgBox("Canceling wizard.");
+
+                }
+            }
+
+            //Add node Wizard
+            Interaction.MsgBox("This is a guided a Node Creation series of interactions, ready to continue?");
+            tb_ID.Text = Interaction.InputBox("Please Input the ID.\nAn ID will not affect the inner workings of the game, This only helps you keep track\nof what this node is.\n Most be text (no simbols like '#', '%', '≥', etc.)", "ID");
+            tb_Name.Text = Interaction.InputBox("Please Input the name of the node,\nThis is the part the nodes refer when linking options","Name");
+            tb_Title.Text = Interaction.InputBox("Please Input the Title of the node.\nThis is the text that shows in the in-game's buttons, most will appear as the button's that link to node\n(Ex. \"Drop down the hole\")", "Title");
+            string typeSel = Interaction.InputBox("Please Input the Node Type by inputing the number corresponding with the Desired type.\n" +
+                "1.) Non-combat: This type says there will be a choise from the player, this is node is responsable to link other nodes (ex. Do you approach the hole?)\n" +
+                "2.) Combat: This node says that there will be a confrontation between the player and a monster.\n" +
+                "3.) nothing: This marks the end of an adventure. All branches are required to have this to allow the player to continue playing.\n" +
+                "\nPlease Enter a corresponding number","Type");
+            if (typeSel.Trim() == "1")
+            {
+                cb_Type.Text = Node.NodeType.noncombat.ToString();
+                Interaction.MsgBox("All linking with other nodes must be done thru the main interface.\nAfter creating the nodes that are going to be linked to this node, select this node on the Current node drop box and use the Option linking tool to link other nodes.\nOnce finished, click \"Edit button\".", MsgBoxStyle.Information, "Note on Linking");
+            }
+            else if (typeSel.Trim() == "2")
+            {
+                cb_Type.Text = Node.NodeType.combat.ToString();
+
+                string EnemyList = "Please Select enemy to fight:\n";
+                for (int i = 1; i <= EnemyLibrary.Count; i++)
+                {
+                    EnemyList += String.Format("{0}.) {1}\n", i, EnemyLibrary[i - 1]);
+                }
+                EnemyList += "\nPlease Input number of enemy to fight.";
+
+                cb_EnemyLink.Text = EnemyLibrary[int.Parse(Interaction.InputBox(EnemyList, "Enemy").Trim()) - 1];
+
+                MsgBoxResult r = Interaction.MsgBox("Will the description of the node be played before encounter?", MsgBoxStyle.YesNo);
+                switch (r)
+                {
+                    case MsgBoxResult.Yes:
+                        cb_battleDesc.Checked = true;
+                        break;
+                    case MsgBoxResult.No:
+                        cb_battleDesc.Checked = false;
+                        break;
+
+                    default:
+                        cb_battleDesc.Checked = false;
+                        break;
+                }
+            }
+            else
+            {
+                cb_Type.Text = Node.NodeType.nothing.ToString();
+            }
+            tb_Desc.Text = Interaction.InputBox("Description of node.\n(Can be edited later thru the 'edit button')", "Description");
+
+            log.Debug("Added Node thru wizard");
+            addNewNodeToList();
+            UpdatePlaceDir();
+        }
+
+        private void bt_importZip_Click(object sender, EventArgs e)
+        {
+            log.Info("Importing a zip!");
+            try
+            {
+
+                OpenFileDialog zipSelection = new OpenFileDialog();
+                zipSelection.Title = "Select ZIP created with VA_GUI";
+                zipSelection.Filter = "Zip files (*.zip)|*.zip";
+
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\voreadventure";
+
+                if (zipSelection.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists(zipSelection.FileName) && zipSelection.FileName.EndsWith("zip"))
+                    {
+                        ZipFile.Open(zipSelection.FileName, ZipArchiveMode.Read).ExtractToDirectory(path, true);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error importing ZIP, check log for details");
+                log.Error("Error importing Zip", ex);
+            }
+        }
+    }
+
+   
+
+    public static class ZipArchiveExtensions
+    {
+#pragma warning disable 0246
+        public static void ExtractToDirectory(this ZipArchive archive, string destinationDirectoryName, bool overwrite)
+        {
+            if (!overwrite)
+            {
+                archive.ExtractToDirectory(destinationDirectoryName);
+                return;
+            }
+            foreach (ZipArchiveEntry file in archive.Entries)
+            {
+                string completeFileName = Path.Combine(destinationDirectoryName, file.FullName);
+                if (file.Name == "")
+                {// Assuming Empty for Directory
+                    Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
+                    continue;
+                }
+                if (!Directory.Exists(Path.GetDirectoryName(file.Name))) Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
+                file.ExtractToFile(completeFileName, true);
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace VA_GUI
 
         /// <summary>This dictionary stores the node. it uses the Name attribute in the propety as a key/// </summary>
         public Dictionary<string, Node> OptionLinking = new Dictionary<string, Node>();
-        private List<string> OptionIDLink = new List<string>();
+        public List<string> OptionIDLink = new List<string>();
 
 
         public string EnemyToFight;
@@ -143,6 +143,7 @@ namespace VA_GUI
         {
             try
             {
+                log.Debug("Starting Interpreting New Node");
                 for (int li = 0; li < fileSection.Count; li++)
                 {
                     if (!fileSection[li].StartsWith("#") || fileSection[li].Length != 0)
@@ -153,20 +154,23 @@ namespace VA_GUI
                         {
                             case LineType.ID:
                                 data = fileSection[li].Replace("[", "").Replace(" ", "");
+                                log.Debug("detected an ID line: " + data);
                                 ID = data;
                                 break;
                             case LineType.Name:
                                 data = fileSection[li].Replace("name:", "").Replace(";", "").Replace(" ", "");
+                                log.Debug("detected an Name line: " + data);
                                 Name = data;
                                 break;
                             case LineType.Title:
                                 data = fileSection[li].Replace("title:", "").Replace(";", "");
                                 Title = data;
+                                log.Debug("detected an Title line: " + data);
                                 break;
                             case LineType.Type:
                                 data = fileSection[li].Replace("type:", "").Replace(";", "").Replace(" ", "");
-                                if (data == "noncombat") Typedata = NodeType.noncombat;
-                                else if (data == "combat") Typedata = NodeType.combat;
+                                if (data == "noncombat") { Typedata = NodeType.noncombat; log.Debug("detected an type line: noncombat"); }
+                                else if (data == "combat") { Typedata = NodeType.combat; log.Debug("detected an ID line: combat"); }
                                 else Typedata = NodeType.nothing;
                                 Type = Typedata;
                                 break;
@@ -194,7 +198,7 @@ namespace VA_GUI
 
                             case LineType.DescribeCombat:
                                 data = fileSection[li].Replace("describe:", "").Replace(";", "").Replace(" ", "");
-                                BattleDescr = bool.Parse(data);
+                                BattleDescr = bool.Parse(data.ToLower());
 
                                 break;
                             case LineType.Enemy:
@@ -276,6 +280,11 @@ namespace VA_GUI
                 default:
                     return NodeType.nothing;
             }
+        }
+
+        public List<string> GetIDLinkingList()
+        {
+            return OptionIDLink;
         }
 
         public override string ToString()

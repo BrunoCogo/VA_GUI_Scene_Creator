@@ -19,8 +19,6 @@ namespace VA_GUI
         [STAThread]
         static void Main()
         {
-            log.Error("Testing Error message");
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

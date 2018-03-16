@@ -131,7 +131,7 @@ namespace VA_GUI
             log.Info("Creating Save Dialog File.");
             SaveFileDialog n = new SaveFileDialog();
             n.DefaultExt = ".zip";
-            n.Filter = "Zip File|.zip";
+            n.Filter =  "Zip files (*.zip)|*.zip";
             if (n.ShowDialog() == DialogResult.OK)
             {
 
@@ -201,18 +201,18 @@ namespace VA_GUI
                 List<string> EnemyList = BuildmonsterFileListing();
 
                 log.Debug("Creating Customs in Temp folder");
-                Directory.CreateDirectory((path + @"\customs\places"));
-                Directory.CreateDirectory((path + @"\customs\monsters"));
+                Directory.CreateDirectory((path + @"\custom\places"));
+                Directory.CreateDirectory((path + @"\custom\monsters"));
                 foreach (string p in PlaceList)
                 {
                     log.Debug("Copying " + p + " to temporal files");
-                    File.Copy(p, path + @"\customs\places\" + Path.GetFileName(p), true);
+                    File.Copy(p, path + @"\custom\places\" + Path.GetFileName(p), true);
                 }
 
                 foreach (string e in EnemyList)
                 {
                     log.Debug("Copying " + e + " to temporal files");
-                    File.Copy(e, path + @"\customs\monsters\" + Path.GetFileName(e),true);
+                    File.Copy(e, path + @"\custom\monsters\" + Path.GetFileName(e),true);
                 }
 
                 log.Info("Isolation Process Succeeded");
