@@ -166,14 +166,30 @@ namespace VA_GUI
                     Textbox_PREVIEW.Text += "name:" + thisNode.Name + ";" + L;
                     Textbox_PREVIEW.Text += "title:" + thisNode.Title + ";" + L;
                     Textbox_PREVIEW.Text += "type:" + "combat" + ";" + L;
+                    if(thisNode.EnemyToFight.Trim() != "")
+                    { 
                     Textbox_PREVIEW.Text += "enemy:" + thisNode.EnemyToFight + ";" + L;
 
-                    if (!EnemiesUsed.Contains(thisNode.EnemyToFight))
+                        if (!EnemiesUsed.Contains(thisNode.EnemyToFight))
+                        {
+                            EnemiesUsed.Add(thisNode.EnemyToFight);
+                        }
+                        else
+                        {
+                            if (MessageBox.Show("Enemy refer is not in enemy librery, do you still want to continue using this enemy?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            {
+                                EnemiesUsed.Add(thisNode.EnemyToFight + "(Not know in library)");
+                            }
+                        }
+                    }
+                    else
                     {
-                        EnemiesUsed.Add(thisNode.EnemyToFight);
+                        log.Error("tried implementing a combat node with no enemy attached");
+                        MessageBox.Show("There was an error with node : " + thisNode.ToString() + "\nThis node has no enemy or known enemy on a combat node. Closeing Previewer."); this.Close();
                     }
 
-                    Textbox_PREVIEW.Text += "describe:" + thisNode.Description + ";" + L;
+                    Textbox_PREVIEW.Text += "describe:" + thisNode.BattleDescr.ToString().ToLower() + ";" + L;
+                    //Textbox_PREVIEW.Text += "description:" + thisNode.Description.Replace("\"","'") + ";" + L;
                     if (thisNode.ProticeStart)
                     {
                         SetReference(thisNode.Name);
@@ -188,7 +204,7 @@ namespace VA_GUI
                     Textbox_PREVIEW.Text += "name:" + thisNode.Name + ";" + L;
                     Textbox_PREVIEW.Text += "title:" + thisNode.Title + ";" + L;
                     Textbox_PREVIEW.Text += "type:" + "nothing" + ";" + L;
-                    Textbox_PREVIEW.Text += "description:" + thisNode.Description + ";" + L;
+                    Textbox_PREVIEW.Text += "description:" + thisNode.Description.Replace("\"", "'") + ";" + L;
                     if (thisNode.ProticeStart)
                     {
                         SetReference(thisNode.Name);
@@ -203,6 +219,8 @@ namespace VA_GUI
                     Textbox_PREVIEW.Text += "title:" + thisNode.Title + ";" + L;
                     Textbox_PREVIEW.Text += "type:" + "noncombat" + ";" + L;
                     Textbox_PREVIEW.Text += "optioncount:" + thisNode.OptionCount + ";" + L;
+                    Textbox_PREVIEW.Text += "description:" + thisNode.Description.Replace("\"", "'") + ";" + L;
+
                     foreach (KeyValuePair<string,Node> item in thisNode.OptionLinking)
                     {
                         Textbox_PREVIEW.Text += "option:"+ item.Key+ ";" + L;

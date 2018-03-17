@@ -629,6 +629,8 @@ namespace VA_GUI
             tb_Title.Text = currentNode.Title;
             tb_Desc.Text = currentNode.Description;
             cb_Type.SelectedItem = currentNode.Type.ToString();
+            cb_Type.SelectedIndex = cb_Type.Items.IndexOf(currentNode.Type.ToString().ToLower());
+            cb_Type.Text = cb_Type.SelectedItem.ToString();
             num_OptionCount.Value = currentNode.OptionCount;
 
             dgv_Olinking.Rows.Clear();
@@ -798,6 +800,7 @@ namespace VA_GUI
                 num_OptionCount.Visible = true;
                 dgv_Olinking.Visible = true;
                 label6.Visible = true;
+                tb_Desc.Visible = true;
             }
             else if (cb_Type.SelectedItem == "combat")
             {
@@ -808,6 +811,7 @@ namespace VA_GUI
                 num_OptionCount.Visible = false;
                 dgv_Olinking.Visible = false;
                 label6.Visible = false;
+                tb_Desc.Visible = false;
             }
             else if (cb_Type.SelectedItem == "nothing")
             {
@@ -818,6 +822,7 @@ namespace VA_GUI
                 num_OptionCount.Visible = false;
                 dgv_Olinking.Visible = false;
                 label6.Visible = false;
+                tb_Desc.Visible = true;
             }
 #pragma warning restore CS0252 // Possible unintended reference comparison; left hand side needs cast
 
@@ -840,7 +845,7 @@ namespace VA_GUI
 
         private void tb_Desc_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void tb_ID_TextChanged(object sender, EventArgs e)
@@ -1149,9 +1154,13 @@ namespace VA_GUI
                 log.Error("Error importing Zip", ex);
             }
         }
+
+        private void tb_Desc_TextChanged_1(object sender, EventArgs e)
+        {
+        }
     }
 
-   
+
 
     public static class ZipArchiveExtensions
     {

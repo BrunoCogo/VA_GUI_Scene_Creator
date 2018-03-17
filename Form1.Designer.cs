@@ -40,7 +40,6 @@
             this.cb_StarterAdeventure = new System.Windows.Forms.CheckBox();
             this.Num_Chance = new System.Windows.Forms.NumericUpDown();
             this.label_Chance = new System.Windows.Forms.Label();
-            this.tb_Desc = new System.Windows.Forms.RichTextBox();
             this.bt_newNode = new System.Windows.Forms.Button();
             this.tb_chance = new System.Windows.Forms.TrackBar();
             this.tb_ID = new System.Windows.Forms.TextBox();
@@ -73,6 +72,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.bt_importZip = new System.Windows.Forms.Button();
+            this.tb_Desc = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Chance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb_chance)).BeginInit();
@@ -110,12 +110,12 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.tb_Desc);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.cb_battleDesc);
             this.panel1.Controls.Add(this.cb_StarterAdeventure);
             this.panel1.Controls.Add(this.Num_Chance);
             this.panel1.Controls.Add(this.label_Chance);
-            this.panel1.Controls.Add(this.tb_Desc);
             this.panel1.Controls.Add(this.bt_newNode);
             this.panel1.Controls.Add(this.tb_chance);
             this.panel1.Controls.Add(this.tb_ID);
@@ -221,15 +221,6 @@
             this.label_Chance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label_Chance.Visible = false;
             this.label_Chance.Click += new System.EventHandler(this.label_Chance_Click);
-            // 
-            // tb_Desc
-            // 
-            this.tb_Desc.Location = new System.Drawing.Point(148, 370);
-            this.tb_Desc.Name = "tb_Desc";
-            this.tb_Desc.Size = new System.Drawing.Size(681, 119);
-            this.tb_Desc.TabIndex = 29;
-            this.tb_Desc.Text = "";
-            this.tb_Desc.TextChanged += new System.EventHandler(this.tb_Desc_TextChanged);
             // 
             // bt_newNode
             // 
@@ -671,6 +662,16 @@
             this.bt_importZip.UseVisualStyleBackColor = true;
             this.bt_importZip.Click += new System.EventHandler(this.bt_importZip_Click);
             // 
+            // tb_Desc
+            // 
+            this.tb_Desc.AcceptsReturn = true;
+            this.tb_Desc.Location = new System.Drawing.Point(143, 370);
+            this.tb_Desc.Multiline = true;
+            this.tb_Desc.Name = "tb_Desc";
+            this.tb_Desc.Size = new System.Drawing.Size(686, 119);
+            this.tb_Desc.TabIndex = 35;
+            this.tb_Desc.TextChanged += new System.EventHandler(this.tb_Desc_TextChanged_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -734,7 +735,6 @@
         private System.Windows.Forms.Button bt_delPlace;
         private System.Windows.Forms.TrackBar tb_chance;
         private System.Windows.Forms.Button bt_newNode;
-        private System.Windows.Forms.RichTextBox tb_Desc;
         private System.Windows.Forms.NumericUpDown Num_Chance;
         private System.Windows.Forms.Label label_Chance;
         private System.Windows.Forms.CheckBox cb_StarterAdeventure;
@@ -746,6 +746,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button bt_importZip;
+        private System.Windows.Forms.TextBox tb_Desc;
     }
 }
 

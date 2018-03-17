@@ -149,15 +149,17 @@ namespace VA_GUI
         /// <param name="fileSection">Extrap of text separaded node</param>
         public void InterpretNode(List<string> fileSection)
         {
-            try
-            {
-                log.Debug("Starting Interpreting New Node");
+
+
+            string data = "";
+            NodeType Typedata;
+            log.Debug("Starting Interpreting New Node");
                 for (int li = 0; li < fileSection.Count; li++)
+                {
+                try
                 {
                     if (!fileSection[li].StartsWith("#") || fileSection[li].Length != 0)
                     {
-                        string data;
-                        NodeType Typedata;
                         switch (GetLineType(fileSection[li]))
                         {
                             case LineType.ID:
@@ -176,7 +178,7 @@ namespace VA_GUI
                                 log.Debug("detected an Title line: " + data);
                                 break;
                             case LineType.Type:
-                                data = fileSection[li].Replace("type:", "").Replace(";", "").Replace(" ", "");
+                                data = fileSection[li].Replace("type:", "").Replace(";", "").Replace(" ", "").ToLower();
                                 if (data == "noncombat") { Typedata = NodeType.noncombat; log.Debug("detected an type line: noncombat"); }
                                 else if (data == "combat") { Typedata = NodeType.combat; log.Debug("detected an ID line: combat"); }
                                 else Typedata = NodeType.nothing;
@@ -205,9 +207,22 @@ namespace VA_GUI
                                 break;
 
                             case LineType.DescribeCombat:
-                                data = fileSection[li].Replace("describe:", "").Replace(";", "").Replace(" ", "");
-                                BattleDescr = bool.Parse(data.ToLower());
+                                data = fileSection[li].Replace("describe:", "").Replace(";", "");
+                                try
+                                {
+                                    string Tdata = fileSection[li].Replace("describe:", "").Replace(";", "").Replace(" ", "");
+                                    BattleDescr = bool.Parse(Tdata.ToLower());
 
+                                }
+                                catch (Exception ex)
+                                {
+                                    if (MessageBox.Show("Error interpreting node - Common case\nA line was marked as \"describe\" but could not get a true or false answer from it. Content: " + data + "\n\nDid you mean to put this a \"Description\" instead?", "Error Catching", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                    {
+                                        log.Info("Place Description marked as Described, CORRECTED", ex);
+                                        Description = data;
+                                    }
+                                }
+                                
                                 break;
                             case LineType.Enemy:
                                 data = fileSection[li].Replace("enemy:", "").Replace(";", "").Replace(" ", "");
@@ -220,11 +235,12 @@ namespace VA_GUI
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    log.Error("THERE WAS AN ERROR TRYING TO READ A NODE", ex);
+                }
             }
-            catch (Exception ex)
-            {
-                log.Error("THERE WAS AN ERROR TRYING TO READ A NODE", ex);
-            }
+            
             
         }
 

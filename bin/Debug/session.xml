@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SessionSeriasable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <keys>
+    <string>Pool</string>
     <string>Bar</string>
     <string>BattleTest</string>
     <string>Hotel</string>
-    <string>Pool</string>
   </keys>
   <NSerias>
+    <ArrayOfNodeSeria>
+      <NodeSeria>
+        <ID>PoolExploration</ID>
+        <Name>112</Name>
+        <Title>Check the pool outside</Title>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>ApproachOrca</string>
+        </OptionIDLink>
+        <Description> You walk to the back part of the hotel towards the pool. You where greated my a sight that came to be little arousing for you. On the pool there was a ocean whale with her belly up showing off here new bikiny... it dosent cover what it supposed to... Next to it you see a anthropomorphic dragon laying back taking the sun. Who are you going to approach</Description>
+        <ProticeStart>true</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>1</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>UpdatePlaceHolderPool</ID>
+        <Name>WaitForUpdate</Name>
+        <Title> Hu...Maybe next update</Title>
+        <Type>nothing</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <Description> You looked on the side and there was a sign... "Because of outside causes of this wolrd, it is not recommendable for you to interact with stuff that is just not there yet. We advice you to wait". Teased, you puted a note on the ground advising the author of this mod to stop trying to break the four wall, you also added the request to update soon</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>OrcaBeginning</ID>
+        <Name>ApproachOrca</Name>
+        <Title>Approach the Orca</Title>
+        <Type>noncombat</Type>
+        <OptionCount>1</OptionCount>
+        <OptionIDLink>
+          <string>FightwithOrca</string>
+        </OptionIDLink>
+        <Description> After a few moments, you step slowly again unto the pool. A breeze of cold air sends a shiver down your spine. The air around you gets colder as the top layer of water from the pool evaporates slowly. You set right next to the pool only wetting your toes on one of the pool steps. The water, even thought in a hot climate, feels fresh, more than usual. 'He hun, mind to come over here and help me tighten this thing for me? I swear I don’t bite'</Description>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+      <NodeSeria>
+        <ID>Fightwithorca</ID>
+        <Name>FightwithOrca</Name>
+        <Title>Ignore her, you got swimming to do!</Title>
+        <Type>combat</Type>
+        <OptionCount>0</OptionCount>
+        <OptionIDLink />
+        <EnemyToFight>Fox</EnemyToFight>
+        <ProticeStart>false</ProticeStart>
+        <BattleDescr>false</BattleDescr>
+        <chance>0</chance>
+      </NodeSeria>
+    </ArrayOfNodeSeria>
     <ArrayOfNodeSeria>
       <NodeSeria>
         <ID>BarEntry</ID>
@@ -364,34 +418,6 @@
         <EnemyToFight>Room2Fox</EnemyToFight>
         <ProticeStart>false</ProticeStart>
         <BattleDescr>true</BattleDescr>
-        <chance>0</chance>
-      </NodeSeria>
-    </ArrayOfNodeSeria>
-    <ArrayOfNodeSeria>
-      <NodeSeria>
-        <ID>PoolExploration</ID>
-        <Name>112</Name>
-        <Title>Check the pool outside</Title>
-        <Type>noncombat</Type>
-        <OptionCount>1</OptionCount>
-        <OptionIDLink>
-          <string>WaitForUpdate</string>
-        </OptionIDLink>
-        <Description>You walk to the back part of the hotel towards the pool. You where greated my a sight that came to be little arousing for you. On the pool there was a ocean whale with her belly up showing off here new bikiny... it dosent cover what it supposed to... Next to it you see a anthropomorphic dragon laying back taking the sun. Who are you going to approach</Description>
-        <ProticeStart>true</ProticeStart>
-        <BattleDescr>false</BattleDescr>
-        <chance>1</chance>
-      </NodeSeria>
-      <NodeSeria>
-        <ID>UpdatePlaceHolderPool</ID>
-        <Name>WaitForUpdate</Name>
-        <Title> Hu...Maybe next update</Title>
-        <Type>nothing</Type>
-        <OptionCount>0</OptionCount>
-        <OptionIDLink />
-        <Description> .You looked on the side and there was a sign... "Because of outside causes of this wolrd, it is not recommendable for you to interact with stuff that is just not there yet. We advice you to wait". Teased, you puted a note on the ground advising the author of this mod to stop trying to break the four wall, you also added the request to update soon</Description>
-        <ProticeStart>false</ProticeStart>
-        <BattleDescr>false</BattleDescr>
         <chance>0</chance>
       </NodeSeria>
     </ArrayOfNodeSeria>

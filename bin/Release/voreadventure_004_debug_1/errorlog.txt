@@ -1,0 +1,16 @@
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader.main(JarRsrcLoader.java:58)
+Caused by: java.lang.StringIndexOutOfBoundsException: String index out of range: 869
+	at java.lang.String.substring(Unknown Source)
+	at places.CustomPlace.clean(CustomPlace.java:70)
+	at places.CustomPlace.<init>(CustomPlace.java:47)
+	at main.PlacesActionListener.<init>(PlacesActionListener.java:12)
+	at main.VGameMain.buildExplorePanel(VGameMain.java:666)
+	at main.VGameMain.build(VGameMain.java:125)
+	at main.VGameMain.<init>(VGameMain.java:37)
+	at main.Main.main(Main.java:106)
+	... 5 more
