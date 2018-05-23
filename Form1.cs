@@ -51,6 +51,7 @@ namespace VA_GUI
             log.Info("Loading intizialided");
             prevSession = lSe.LoadPreviousSession().ToPlaceDirectory();
             //Merge already loaded PlaceDir with prev session list
+
             PlaceDir.Merge(prevSession);
             foreach (string key in PlaceDir.Dir.Keys)
             {
@@ -119,7 +120,7 @@ namespace VA_GUI
                 dgv_Olinking.Visible = false;
                 label6.Visible = false;
 
-                cb_CurrentNode.SelectedIndex = 0;
+                cb_CurrentNode.SelectedIndex = cb_CurrentNode.Items.IndexOf(cb_CurrentNode.Items.Count - 1);
             }
             catch (Exception ex)
             {
@@ -772,7 +773,7 @@ namespace VA_GUI
             try
             {
                 log.Info("Opening Previewer");
-            Output_Previewer preview = new Output_Previewer(NodeLibraryList, cb_place.SelectedItem.ToString());
+            Output_Previewer preview = new Output_Previewer(NodeLibraryList, cb_place.SelectedItem.ToString(), EnemyLibrary);
             preview.ShowDialog();
             }
             catch (Exception)
@@ -1157,6 +1158,12 @@ namespace VA_GUI
 
         private void tb_Desc_TextChanged_1(object sender, EventArgs e)
         {
+        }
+
+        //Report a bug
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new reportbug().ShowDialog();
         }
     }
 

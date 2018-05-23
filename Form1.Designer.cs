@@ -35,6 +35,7 @@
             this.bt_LoadCustom = new System.Windows.Forms.Button();
             this.bt_ExportCustom = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tb_Desc = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.cb_battleDesc = new System.Windows.Forms.CheckBox();
             this.cb_StarterAdeventure = new System.Windows.Forms.CheckBox();
@@ -72,7 +73,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.bt_importZip = new System.Windows.Forms.Button();
-            this.tb_Desc = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Num_Chance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tb_chance)).BeginInit();
@@ -143,6 +144,16 @@
             this.panel1.Size = new System.Drawing.Size(846, 537);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // tb_Desc
+            // 
+            this.tb_Desc.AcceptsReturn = true;
+            this.tb_Desc.Location = new System.Drawing.Point(143, 370);
+            this.tb_Desc.Multiline = true;
+            this.tb_Desc.Name = "tb_Desc";
+            this.tb_Desc.Size = new System.Drawing.Size(686, 119);
+            this.tb_Desc.TabIndex = 35;
+            this.tb_Desc.TextChanged += new System.EventHandler(this.tb_Desc_TextChanged_1);
             // 
             // button3
             // 
@@ -628,7 +639,7 @@
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.button1.Location = new System.Drawing.Point(786, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(63, 30);
+            this.button1.Size = new System.Drawing.Size(63, 54);
             this.button1.TabIndex = 28;
             this.button1.Text = "Donate";
             this.button1.UseVisualStyleBackColor = true;
@@ -662,15 +673,19 @@
             this.bt_importZip.UseVisualStyleBackColor = true;
             this.bt_importZip.Click += new System.EventHandler(this.bt_importZip_Click);
             // 
-            // tb_Desc
+            // button4
             // 
-            this.tb_Desc.AcceptsReturn = true;
-            this.tb_Desc.Location = new System.Drawing.Point(143, 370);
-            this.tb_Desc.Multiline = true;
-            this.tb_Desc.Name = "tb_Desc";
-            this.tb_Desc.Size = new System.Drawing.Size(686, 119);
-            this.tb_Desc.TabIndex = 35;
-            this.tb_Desc.TextChanged += new System.EventHandler(this.tb_Desc_TextChanged_1);
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button4.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button4.Location = new System.Drawing.Point(717, 6);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(63, 54);
+            this.button4.TabIndex = 31;
+            this.button4.Text = "Report a bug";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
@@ -678,6 +693,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.ClientSize = new System.Drawing.Size(855, 623);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.bt_importZip);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -747,6 +763,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button bt_importZip;
         private System.Windows.Forms.TextBox tb_Desc;
+        private System.Windows.Forms.Button button4;
     }
 }
 

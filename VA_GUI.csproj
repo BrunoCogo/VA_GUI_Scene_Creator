@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,8 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -126,6 +126,12 @@
     <Compile Include="PlaceFileWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reportbug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reportbug.Designer.cs">
+      <DependentUpon>reportbug.cs</DependentUpon>
+    </Compile>
     <Compile Include="SessionLS.cs" />
     <Compile Include="SessionSeriasable.cs" />
     <Compile Include="ZipperForm.cs">
@@ -152,6 +158,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="reportbug.resx">
+      <DependentUpon>reportbug.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ZipperForm.resx">
       <DependentUpon>ZipperForm.cs</DependentUpon>
     </EmbeddedResource>

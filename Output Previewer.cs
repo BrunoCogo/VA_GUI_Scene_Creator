@@ -17,6 +17,8 @@ namespace VA_GUI
 
         string myName = "";
 
+        List<string> Aveilable_enemies;
+
         List<Node> NodeCollection;
         List<string> WasNotReferencedList;
         List<string> WasReferencedList;
@@ -29,8 +31,9 @@ namespace VA_GUI
 
         const string L = "\r\n";
 
-        public Output_Previewer(List<Node> placeNodes, string PlaceName)
+        public Output_Previewer(List<Node> placeNodes, string PlaceName, List<string> Enemies)
         {
+            Aveilable_enemies = Enemies;
             log.Debug("Initiating Output Preview");
             if (placeNodes.Count == 0)
             {
@@ -170,8 +173,11 @@ namespace VA_GUI
                     { 
                     Textbox_PREVIEW.Text += "enemy:" + thisNode.EnemyToFight + ";" + L;
 
-                        if (!EnemiesUsed.Contains(thisNode.EnemyToFight))
+                        //Check that we do have an enemy
+                        if (Aveilable_enemies.Contains(thisNode.EnemyToFight))//!EnemiesUsed.Contains(thisNode.EnemyToFight.ToString()) || )
                         {
+                            //check if enemy has been added
+                            if(!EnemiesUsed.Contains(thisNode.EnemyToFight.ToString()))
                             EnemiesUsed.Add(thisNode.EnemyToFight);
                         }
                         else

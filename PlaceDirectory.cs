@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VA_GUI
 {
@@ -25,23 +27,19 @@ namespace VA_GUI
             { 
             foreach (string k in b.Dir.Keys)
             {
+                    //Check if file still exist
+                    if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\voreadventure\\custom\\places\\" + k))
+                    {
+                        if (MessageBox.Show("The place \"" + k + "\" does not exits, but there was a reference in the pass session,\n would you like to keep the data of this place?", "Missing place referd - Previous session", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            continue;
+                        }
+                    }
                 //Mergin missing keys
                 if (!Dir.ContainsKey(k))
                 {
                     Dir.Add(k, b.Dir[k]);
-
-                    /*Delete This comment in case it shadow-copies the list
-                    
-                    List<Node> list = new List<Node>();
-                    
-                    //Create Deep Copy of nodes
-                    foreach (Node n in b.Dir[k])
-                    {
-                        list.Add(n);
-                    }
-                    //Add Key and value
-                    Dir.Add(k, list);
-                    */
+                        
                 }
                 //If key is not missing, Load the entierty of the list*
                 //* only if it has more or the same as to avoid data lost

@@ -200,19 +200,34 @@ namespace VA_GUI
                 log.Debug("Building Enemy File table");
                 List<string> EnemyList = BuildmonsterFileListing();
 
-                log.Debug("Creating Customs in Temp folder");
+                log.Debug("Creating Custom in Temp folder");
                 Directory.CreateDirectory((path + @"\custom\places"));
                 Directory.CreateDirectory((path + @"\custom\monsters"));
                 foreach (string p in PlaceList)
                 {
-                    log.Debug("Copying " + p + " to temporal files");
-                    File.Copy(p, path + @"\custom\places\" + Path.GetFileName(p), true);
+                    if (File.Exists(p))
+                    {
+                        log.Debug("Copying " + p + " to temporal files");
+                        File.Copy(p, path + @"\custom\places\" + Path.GetFileName(p), true);
+                    }
+                    else
+                    {
+                        MessageBox.Show(p + " does not exist. It will be excluded from zip.", "Missing file");
+
+                    }
                 }
 
                 foreach (string e in EnemyList)
                 {
-                    log.Debug("Copying " + e + " to temporal files");
-                    File.Copy(e, path + @"\custom\monsters\" + Path.GetFileName(e),true);
+                    if (File.Exists(e))
+                    {
+                        log.Debug("Copying " + e + " to temporal files");
+                        File.Copy(e, path + @"\custom\monsters\" + Path.GetFileName(e), true);
+                    }
+                    else
+                    {
+                        MessageBox.Show(e + " does not exist. It will be excluded from zip.","Missing file");
+                    }
                 }
 
                 log.Info("Isolation Process Succeeded");
